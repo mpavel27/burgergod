@@ -1,0 +1,19 @@
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    padding: 20px;
+}
+
+.content {
+    margin-left: 250px;
+}
+
+.header {
+    position: fixed;
+    padding-left: 250px;
+}
+
+@media only screen and (max-width: 992px) {
+
+}

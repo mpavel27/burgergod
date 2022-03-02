@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script:400,700&display=swap');
+
+:root {
+    --primary-color: #f9c41c;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important;
+    overflow-x: hidden;
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: black !important;
+}
+
+.btn {
+    padding: 10px 24px !important;
+    font-weight: 700 !important;
+}
+
+.btn-secondary {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+.nav-section {
+    background-image: url('/assets/images/header-image.png');
+    height: 600px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.nav-section h4 {
+    font-family: "Dancing Script";
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--primary-color) !important;
+    margin-bottom: 0;
+}
+
+.nav-section h3 {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.burgergod-navbar {
+    background: #00000030;
+    transition: all 0.3s;
+}
+
+.where-we-are h4 {
+    font-family: "Dancing Script";
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--primary-color) !important;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.where-we-are h4::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 20%;
+    background-color: #c9c9c9;
+    left: 40%;
+    bottom: -10px;
+}
+
+.where-we-are h5 {
+    letter-spacing: 1.6px;
+}
+
+.about {
+    position: relative;
+}
+
+.burger {
+    position: absolute;
+    width: 200px;
+    opacity: 0.3;
+}
+
+.burger-2 {
+    position: absolute;
+    width: 220px;
+    opacity: 0.3;
+    left: 0;
+    transform: rotate(325deg);
+    bottom: 0;
+}
+
+.burger-3 {
+    position: absolute;
+    width: 250px;
+    opacity: 0.3;
+    right: 0;
+    transform: rotate(325deg);
+    bottom: 50%;
+}
+
+.about h4 {
+    font-family: "Dancing Script";
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--primary-color) !important;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.about h4::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 20%;
+    background-color: #c9c9c9;
+    left: 40%;
+    bottom: -10px;
+}
+
+.about h5 {
+    letter-spacing: 1.6px;
+}
+
+.burger-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.burger-image::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.burger-image .btn {
+    position: absolute;
+    z-index: 5;
+    opacity: 0;
+    margin-bottom: -50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.burger-image:hover::after {
+    opacity: 0.5;
+}
+
+.burger-image:hover .btn {
+    opacity: 1;
+    margin-bottom: 0rem;
+}
+
+.burger-title {
+    font-size: 22px;
+    margin: 0;
+}
+
+.location-text {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.location-text i {
+    width: 35px;
+}
+
+.custom-input {
+    border: 1px solid #cdcdcd;
+    width: 100%;
+    background-color: #ededed;
+    padding: 14px 20px;
+    outline: none;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.custom-input:focus {
+    border-color: var(--primary-color);
+}
+
+.footer {
+    background-color: black;
+    padding: 55px 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+    position: relative;
+    color: #646464;
+    padding-left: 22px;
+}
+
+.footer ul li::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    bottom: 7px;
+    border-radius: 50%;
+}
+
+.footer a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+.footer ul li:last-child {
+    margin-bottom: 0;
+}
+
+.footer h4 {
+    /* margin-left: -18px; */
+    font-weight: 600;
+    color: white;
+}
+
+.copyright p {
+    margin-bottom: 0;
+    text-align: center;
+    margin-top: 55px;
+    color: white !important;
+    font-weight: 500;
+}
+
+.copyright a {
+    color: var(--primary-color) !important;
+}
+
+.where-we-are {
+    margin-bottom: 6rem;
+}
+
+.toggle-navbar {
+    display: none;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color);
+    color: black;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    border-radius: 4px;
+}
+
+.mobile-navbar {
+    display: block;
+    position: fixed;
+    padding: 20px;
+    text-align: center;
+    z-index: 300;
+    top: 116px;
+    background-color: var(--primary-color);
+    width: 300px;
+    right: -300px;
+    transition: all 0.3s;
+}
+
+.map {
+    width: 630px;
+    height: 450px;
+    border-radius: 10px;
+}
+
+.burgergod-navbar.active {
+    background-color: rgba(0, 0, 0, 0.884);
+    box-shadow: 0 0 20px black;
+}
+
+.btn {
+    box-shadow: none !important;
+}
