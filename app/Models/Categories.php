@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Items;
 
 class Categories extends Model
 {
@@ -14,4 +15,8 @@ class Categories extends Model
     ];
 
     protected $table = 'food_categories';
+
+    public function items() {
+        return $this->hasMany(Items::class, 'category');
+    }
 }

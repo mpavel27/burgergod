@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/mobile.css">
-    <link rel="stylesheet" href="/assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <div id="mobile_navbar" class="mobile-navbar justify-content-between shadow">
@@ -112,8 +112,7 @@
         </div>
     </div>
 </footer>
-<script src="assets/vendors/jquery/jquery-3.2.1.js"></script>
-<script src="assets/vendors/jquery/jquery.plate.js"></script>
+<script src="assets/vendors/jquery/jquery.min.js"></script>
 <script src="/assets/js/index.js"></script>
 </body>
 </html>

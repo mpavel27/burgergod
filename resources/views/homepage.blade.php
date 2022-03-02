@@ -4,70 +4,25 @@
     <img class="burger" src="/assets/images/burger.png">
     <img class="burger-2" src="/assets/images/burger.png">
     <img class="burger-3" src="/assets/images/burger.png">
+    @foreach($categories as $category)
     <div class="container">
         <div class="text-center mt-5 mb-5">
-            <h4 class="mb-3">Ce punem pe masa?</h4>
+            <h4 class="mb-3">{{ $category->name }}</h4>
             <h5 class="text-uppercase fw-bold mt-3">Preparatele noastre</h5>
         </div>
         <div class="row">
+            @foreach($category->items as $item)
             <div class="col-lg-3 mb-4">
                 <div class="burger-image">
                     <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
+                    <img src="{{ asset('items/'.$item->image) }}" height="250">
                 </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
+                <p class="burger-title text-center mt-2">{{ $item->name }}</p>
             </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
-                    <img src="/assets/images/burger.jpg" height="400">
-                </div>
-                <p class="burger-title text-center mt-2">American Burger</p>
-            </div>
+            @endforeach
         </div>
     </div>
+    @endforeach
 </section>
 <section class="where-we-are">
     <div class="container">

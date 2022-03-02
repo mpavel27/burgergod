@@ -17,9 +17,9 @@
         <div class="sidebar bg-dark">
             <div class="d-flex flex-column gap-2">
                 <h4 class="text-center text-white">Burger God</h4>
-                <a href="#" class="btn btn-primary">Dashboard</a>
-                <a href="#" class="btn btn-secondary">Categories</a>
-                <a href="#" class="btn btn-secondary">Items</a>
+                <a href="{{ route('app.admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
+                <a href="{{ route('app.admin.categories') }}" class="btn btn-secondary">Categories</a>
+                <a href="{{ route('app.admin.items') }}" class="btn btn-secondary">Items</a>
                 <a href="#" class="btn btn-secondary">Ingredients</a>
                 <a href="#" class="btn btn-secondary">Clients</a>
                 <a href="#" class="btn btn-secondary">Delivery Boy</a>
@@ -34,12 +34,8 @@
     </div>
     <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('assets/js/admin.js') }}"></script>
     @toastr_js
     @toastr_render
-    <script>
-        $(document).ready(function() {
-            $('#app_dataTable').dataTable();
-        } );
-    </script>
 </body>
 </html>

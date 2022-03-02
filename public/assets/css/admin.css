@@ -36,6 +36,22 @@
     border-bottom-right-radius: 10px;
 }
 
-@media only screen and (max-width: 992px) {
+.btn-square {
+    display: flex;
+    width: 40px;
+    height: 40px !important;
+    line-height: 1;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    color: #fff;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
 
+@media only screen and (max-width: 992px) {
+    div#admin_categories_paginate {
+        margin-top: 14px;
+        margin-bottom: 14px;
+    }
 }

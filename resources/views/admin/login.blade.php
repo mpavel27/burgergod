@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-shims.min.css" media="all">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-font-face.min.css" media="all">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all">
-    <link rel="stylesheet" href="/assets/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
     <div class="d-flex align-items-center" style="min-height: 100vh">
