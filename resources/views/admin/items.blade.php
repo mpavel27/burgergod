@@ -33,7 +33,7 @@
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <a href="" class="btn-square btn-secondary me-2"><i class="fas fa-pen"></i></a>
+                            <a href="{{ route('app.admin.item.edit', ['itemId' => $item->id]) }}" class="btn-square btn-secondary me-2"><i class="fas fa-pen"></i></a>
                             <a href="{{ route('app.admin.item.delete', ['itemId' => $item->id]) }}" class="btn-square btn-danger"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </td>

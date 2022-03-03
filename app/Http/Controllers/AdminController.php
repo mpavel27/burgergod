@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\createCategoryRequest;
 use App\Http\Requests\createItemRequest;
-use Hash;
+use App\Http\Requests\editItemRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Items;
 
@@ -84,10 +84,50 @@ class AdminController extends Controller
 
     public function editItem($itemId) {
         $item = Items::where('id', $itemId)->get();
+        $categories = Categories::get();
         if(count($item) > 0) {
-            return view('admin.editItem', compact('item'));
+            return view('admin.editItem', compact(['item', 'categories']));
         } else {
             abort(404);
+        }
+    }
+
+    public function editItemValidation($itemId, editItemRequest $request) {
+        if($request->validated()) {
+            if (!$request->has('image')) {
+                $item = Items::where('id', $itemId)->update([
+                    'name' => $request->name,
+                    'category' => $request->category,
+                    'description' => $request->description,
+                    'price' => $request->price
+                ]);
+                if ($item) {
+                    toastr()->success("Ai editat cu succes produsul");
+                    return redirect()->route('app.admin.items');
+                }
+            } else {
+                $imageName = time() . '_' . $request->name . '.' . $request->image->extension();
+                $request->image->move(public_path('items'), $imageName);
+                $item = Items::where('id', $itemId)->update([
+                    'name' => $request->name,
+                    'category' => $request->category,
+                    'description' => $request->description,
+                    'price' => $request->price,
+                    'image' => $imageName
+                ]);
+                if ($item) {
+                    toastr()->success("Ai editat cu succes produsul");
+                    return redirect()->route('app.admin.items');
+                }
+            }
+        }
+    }
+
+    public function deleteCategory($categoryId) {
+        $category = Categories::where('id', $categoryId)->delete();
+        if($category) {
+            toastr()->success("Ai sters cu succes categoria");
+            return redirect()->route('app.admin.categories');
         }
     }
 }

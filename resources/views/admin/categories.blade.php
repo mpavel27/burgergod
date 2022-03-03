@@ -11,6 +11,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Nume</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,6 +19,9 @@
                         <tr>
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
+                            <td>
+                                <a href="{{ route('app.admin.category.delete', ['categoryId' => $category->id]) }}" class="btn-square btn-danger"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
