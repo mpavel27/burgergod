@@ -130,4 +130,25 @@ class AdminController extends Controller
             return redirect()->route('app.admin.categories');
         }
     }
+
+    public function editCategory($categoryId) {
+        $category = Categories::where('id', $categoryId)->get();
+        if(count($category) > 0) {
+            return view('admin.editCategory', compact('category'));
+        } else {
+            abort(404);
+        }
+    }
+
+    public function editCategoryValidation($categoryId, createCategoryRequest $request) {
+        if($request->validated()) {
+            $category = Categories::where('id', $categoryId)->update([
+                'name' => $request->name,
+            ]);
+            if($category) {
+                toastr()->success("Ai editat cu succes categoria");
+                return redirect()->route('app.admin.categories');
+            }
+        }
+    }
 }

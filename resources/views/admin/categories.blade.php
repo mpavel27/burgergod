@@ -20,7 +20,10 @@
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
                             <td>
-                                <a href="{{ route('app.admin.category.delete', ['categoryId' => $category->id]) }}" class="btn-square btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                <div class="d-flex">
+                                    <a href="{{ route('app.admin.category.delete', ['categoryId' => $category->id]) }}" class="btn-square btn-danger me-2"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{ route('app.admin.category.edit', ['categoryId' => $category->id]) }}" class="btn-square btn-secondary"><i class="fas fa-pen"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

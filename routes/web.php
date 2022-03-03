@@ -33,5 +33,6 @@ Route::prefix('/admin')->group(function () {
     Route::get('categories', [AdminController::class, 'viewCategories'])->middleware('auth')->name('app.admin.categories');
     Route::post('categories/create', [AdminController::class, 'createCategory'])->middleware('auth')->name('app.admin.categories.create');
     Route::get('category/delete/{categoryId}', [AdminController::class, 'deleteCategory'])->middleware('auth')->name('app.admin.category.delete');
-
+    Route::get('category/edit/{categoryId}', [AdminController::class, 'editCategory'])->middleware('auth')->name('app.admin.category.edit');
+    Route::post('category/edit/{categoryId}/validate', [AdminController::class, 'editCategoryValidation'])->middleware('auth')->name('admin.category.edit.post');
 });
