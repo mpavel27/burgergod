@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createExtraRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginAdminRequest;
@@ -158,5 +159,20 @@ class AdminController extends Controller
         $products = Items::get();
         $extras = Extras::get();
         return view('admin.extras', compact(['extras', 'products']));
+    }
+
+    public function createExtra(createExtraRequest $request) {
+        if($request->validated()) {
+            $create = Extras::insert([
+                'name' => $request->name,
+                'product' => $request->product,
+                'type' => $request->value,
+                'price' => $request->price
+            ]);
+            if($create) {
+                toastr()->success("Ai creat cu succes un extra");
+                return redirect()->route('app.admin.extras');
+            }
+        }
     }
 }

@@ -11,6 +11,8 @@ class Items extends Model
 
     protected $table = 'food_menu';
 
+    public $timestamps = true;
+
     public function getCategoryNameAttribute() {
         $category = Categories::where('id', $this->category)->first();
         if($category) {

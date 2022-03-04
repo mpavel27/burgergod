@@ -16,7 +16,7 @@ class Extras extends Migration
         Schema::create('food_extras', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('price');
+            $table->float('price')->default(0);
             $table->integer('product');
             $table->integer('type');
             $table->timestamps();

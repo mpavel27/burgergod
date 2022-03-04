@@ -45,5 +45,22 @@ Route::prefix('/admin')->group(function () {
 
     Route::prefix('extras')->middleware('auth')->group(function () {
         Route::get('/', [AdminController::class, 'viewExtras'])->name('app.admin.extras');
+        Route::post('/create', [AdminController::class, 'createExtra'])->name('app.admin.extras.create');
     });
 });
+
+Route::get('/cleareverything', function () {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared<br>";
+    $clearview = Artisan::call('view:clear');
+    echo "View cleared<br>";
+    $clearconfig = Artisan::call('config:cache');
+    echo "Config cleared<br>";
+    $clearroute = Artisan::call('route:cache');
+    echo "Route cleared<br>";
+})->middleware('auth');
+
+Route::get('/migrate', function () {
+    $migrate = Artisan::call('migrate');
+    echo "Migration completed";
+})->middleware('auth');

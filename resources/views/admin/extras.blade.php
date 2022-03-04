@@ -41,24 +41,24 @@
                     <h5 class="modal-title" id="addExtraLabel">Adauga un extra</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('app.admin.categories.create') }}">
+                <form method="POST" action="{{ route('app.admin.extras.create') }}">
                     @csrf
                     <div class="modal-body">
                         <input name="name" type="text" class="form-control mb-3" placeholder="Numele categoriei">
-                        <select class="form-control mb-3" id="product">
+                        <select name="product" class="form-control mb-3" id="product">
                             <option selected>Selecteaza produsul</option>
                             @foreach($products as $product)
                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
                             @endforeach
                         </select>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="value" id="valueId1">
+                            <input class="form-check-input" type="radio" name="value" value="1" id="valueId1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Gratis
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="value" id="valueId2" checked>
+                            <input class="form-check-input" type="radio" name="value" value="2" id="valueId2" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Pret
                             </label>

@@ -16,6 +16,8 @@ class Categories extends Model
 
     protected $table = 'food_categories';
 
+    public $timestamps = true;
+
     public function items() {
         return $this->hasMany(Items::class, 'category');
     }

@@ -9,5 +9,11 @@ class Extras extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     protected $table = 'food_extras';
+
+    public $timestamps = true;
 }
