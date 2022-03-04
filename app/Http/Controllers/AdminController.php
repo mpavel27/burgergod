@@ -10,6 +10,8 @@ use App\Http\Requests\createItemRequest;
 use App\Http\Requests\editItemRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Items;
+use App\Models\Extras;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -150,5 +152,11 @@ class AdminController extends Controller
                 return redirect()->route('app.admin.categories');
             }
         }
+    }
+
+    public function viewExtras() {
+        $products = Items::get();
+        $extras = Extras::get();
+        return view('admin.extras', compact(['extras', 'products']));
     }
 }

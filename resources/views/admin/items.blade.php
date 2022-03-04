@@ -15,7 +15,6 @@
                     <th>Descriere</th>
                     <th>Pret</th>
                     <th>Imagine</th>
-                    <th>Print</th>
                     <th>Actiune</th>
                 </tr>
                 </thead>
@@ -28,9 +27,6 @@
                     <td>{{ $item->description }}</td>
                     <td>{{ $item->price }} RON</td>
                     <td><img src="{{ asset('items/'.$item->image) }}" style="width: 100px"></td>
-                    <td>
-                        <a class="btn-square btn-secondary"><i class="fas fa-print"></i></a>
-                    </td>
                     <td>
                         <div class="d-flex align-items-center">
                             <a href="{{ route('app.admin.item.edit', ['itemId' => $item->id]) }}" class="btn-square btn-secondary me-2"><i class="fas fa-pen"></i></a>

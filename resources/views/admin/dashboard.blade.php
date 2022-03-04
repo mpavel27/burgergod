@@ -1,5 +1,33 @@
 @extends('admin.layouts.main')
 @section('admin-container')
+    <h4>Dashboard</h4>
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="bg-primary p-4 rounded-3">
+                <div class="d-flex flex-column justify-content-start text-white">
+                    <h3 class="m-0">0</h3>
+                    <p class="m-0">Comenzi astazi</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="bg-secondary p-4 rounded-3">
+                <div class="d-flex flex-column justify-content-start text-white">
+                    <h3 class="m-0">0</h3>
+                    <p class="m-0">Comenzi totale</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="bg-success p-4 rounded-3">
+                <div class="d-flex flex-column justify-content-start text-white">
+                    <h3 class="m-0">0</h3>
+                    <p class="m-0">Comenzi acceptate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4>Ultimele Comenzi</h4>
     <div class="shadow-lg p-4 rounded-3">
     <table id="app_dataTable" class="table table-striped" style="width:100%">
         <thead>

@@ -16,18 +16,18 @@
     <div class="d-flex">
         <div class="sidebar bg-dark">
             <div class="d-flex flex-column gap-2">
-                <h4 class="text-center text-white">Burger God</h4>
+                <h4 class="text-center text-white m-0">Burger God</h4>
+                <p class="text-center text-muted mb-2">Logged as {{ Auth::user()->name }}</p>
                 <a href="{{ route('app.admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
                 <a href="{{ route('app.admin.categories') }}" class="btn btn-secondary">Categories</a>
                 <a href="{{ route('app.admin.items') }}" class="btn btn-secondary">Items</a>
-                <a href="#" class="btn btn-secondary">Ingredients</a>
+                <a href="{{ route('app.admin.extras') }}" class="btn btn-secondary">Extras</a>
                 <a href="#" class="btn btn-secondary">Clients</a>
                 <a href="#" class="btn btn-secondary">Delivery Boy</a>
             </div>
         </div>
         <div class="content">
             <div class="p-4">
-                <h3 class="mb-3">Bine ai revenit, {{ Auth::user()->name }}</h3>
                 @yield('admin-container')
             </div>
         </div>
