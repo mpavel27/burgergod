@@ -10,7 +10,8 @@ class Extras extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'price'
     ];
 
     protected $table = 'food_extras';

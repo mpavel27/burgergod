@@ -64,7 +64,7 @@
                             </label>
                         </div>
                         <div class="input-group mt-3" id="price">
-                            <input name="price" class="form-control" placeholder="Pret">
+                            <input name="price" class="form-control" id="priceInput" placeholder="Pret">
                             <span class="input-group-text">RON</span>
                         </div>
                     </div>
