@@ -14,7 +14,7 @@
             @foreach($category->items as $item)
             <div class="col-lg-3 mb-4">
                 <div class="burger-image">
-                    <a href="#" class="btn btn-primary">COMANDĂ</a>
+                    <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn btn-primary">COMANDĂ</a>
                     <img src="{{ asset('items/'.$item->image) }}" height="250">
                 </div>
                 <p class="burger-title text-center mt-2">{{ $item->name }}</p>

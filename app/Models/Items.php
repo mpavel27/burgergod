@@ -21,4 +21,8 @@ class Items extends Model
             return 'Aceasta categorie nu are un nume setat.';
         }
     }
+
+    public function extras() {
+        return $this->hasMany(Extras::class, 'product');
+    }
 }

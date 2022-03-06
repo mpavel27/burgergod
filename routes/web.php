@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,15 @@ use App\Http\Controllers\AdminController;
 */
 
 
-Route::get('/', [UserController::class, 'test']);
+Route::get('/', [UserController::class, 'viewHomepage'])->name('app.home');
+Route::get('/item/{id}', [UserController::class, 'viewItem'])->name('app.item');
+Route::post('/loginValidation', [UserController::class, 'login'])->middleware('guest')->name('app.login');
+Route::post('/registerValidation', [UserController::class, 'register'])->middleware('guest')->name('app.register');
+Route::get('/logout', [UserController::class, 'logout'])->name('app.logout');
+
+Route::prefix('/account')->middleware('auth')->group(function () {
+    Route::get('/', [AccountController::class, 'viewAccount'])->name('app.account');
+});
 
 
 Route::prefix('/admin')->group(function () {
@@ -64,3 +73,7 @@ Route::get('/migrate', function () {
     $migrate = Artisan::call('migrate');
     echo "Migration completed";
 })->middleware('auth');
+
+Route::get('/websockets', function() {
+    event(new App\Events\Orders('test'));
+});

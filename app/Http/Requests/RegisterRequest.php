@@ -5,23 +5,23 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class createExtraRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     public function authorize()
     {
         if(auth()->check()){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'product' => 'required|integer',
-            'value' => 'required|integer',
-            'price' => 'required|numeric'
+            'name' => 'required|string|alpha|max:16',
+            'email' => 'required|string|email|unique:users',
+            'phone_number' => 'required|string',
+            'password' => 'required|string|min:5|confirmed'
         ];
     }
 

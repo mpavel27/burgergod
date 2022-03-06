@@ -33,6 +33,13 @@
         </div>
     </div>
     <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        Echo.channel(`ordersChannel`)
+            .listen('Orders', (e) => {
+                console.log(e.message);
+            });
+    </script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
     @toastr_js

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createExtraRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginAdminRequest;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\createCategoryRequest;
 use App\Http\Requests\createItemRequest;
 use App\Http\Requests\editItemRequest;
@@ -21,9 +21,10 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    public function login(LoginAdminRequest $request) {
+    public function login(LoginRequest $request) {
         if ($request->validated()) {
             $credentials = $request->only('email', 'password');
+            $credentials['type'] = 2;
             if (Auth::attempt($credentials)) {
                 toastr()->success('Te-ai autentificat cu success');
             } else {
@@ -56,6 +57,7 @@ class AdminController extends Controller
                 return redirect()->back();
             }
         }
+        return redirect()->back();
     }
 
     public function createItem(createItemRequest $request) {
@@ -74,6 +76,7 @@ class AdminController extends Controller
                 return redirect()->back();
             }
         }
+        return redirect()->back();
     }
 
     public function deleteItem($itemId) {
@@ -124,6 +127,7 @@ class AdminController extends Controller
                 }
             }
         }
+        return redirect()->back();
     }
 
     public function deleteCategory($categoryId) {
@@ -153,6 +157,7 @@ class AdminController extends Controller
                 return redirect()->route('app.admin.categories');
             }
         }
+        return redirect()->back();
     }
 
     public function viewExtras() {
@@ -174,5 +179,6 @@ class AdminController extends Controller
                 return redirect()->route('app.admin.extras');
             }
         }
+        return redirect()->back();
     }
 }
