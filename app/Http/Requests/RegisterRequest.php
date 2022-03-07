@@ -9,7 +9,7 @@ class RegisterRequest extends FormRequest
 {
     public function authorize()
     {
-        if(auth()->check()){
+        if(auth()->check() && auth()->user()->type == 0){
             return false;
         }
         return true;

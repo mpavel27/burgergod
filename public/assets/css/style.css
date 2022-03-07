@@ -174,7 +174,7 @@ body {
 
 .location-text {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .location-text i {
@@ -326,4 +326,59 @@ body {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
     color: black !important;
+}
+
+.btn-square {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.quantity-group {
+    width: 145px;
+    position: relative;
+    border-radius: 50px;
+}
+
+.quantity-group button {
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+}
+
+.quantity-group button:first-child {
+    position: absolute;
+    left: 10px;
+    bottom: 18%;
+}
+
+.quantity-group button:last-child {
+    position: absolute;
+    right: 10px;
+    bottom: 18%;
+}
+
+.quantity-group input {
+    outline: none;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 50px;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #dddddd;
+}
+.cart-image {
+    width: 140px !important;
+}
+
+.delete-product {
+    outline: none;
+    border: none;
+    background-color: unset;
+    color: #de2828;
 }

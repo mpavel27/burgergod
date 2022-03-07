@@ -25,7 +25,7 @@ class AdminController extends Controller
         if ($request->validated()) {
             $credentials = $request->only('email', 'password');
             $credentials['type'] = 2;
-            if (Auth::attempt($credentials)) {
+            if (Auth::guard('admin')->attempt($credentials)) {
                 toastr()->success('Te-ai autentificat cu success');
             } else {
                 toastr()->error('Ceva nu a mers bine, va rugam sa incercat mai tarziu');
@@ -62,7 +62,7 @@ class AdminController extends Controller
 
     public function createItem(createItemRequest $request) {
         if($request->validated()) {
-            $imageName = time() . '_' . $request->name . '.' . $request->image->extension();
+            $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('items'), $imageName);
             $create = Items::insert([
                 'name' => $request->name,
@@ -112,7 +112,7 @@ class AdminController extends Controller
                     return redirect()->route('app.admin.items');
                 }
             } else {
-                $imageName = time() . '_' . $request->name . '.' . $request->image->extension();
+                $imageName = time() . '.' . $request->image->extension();
                 $request->image->move(public_path('items'), $imageName);
                 $item = Items::where('id', $itemId)->update([
                     'name' => $request->name,
@@ -180,5 +180,10 @@ class AdminController extends Controller
             }
         }
         return redirect()->back();
+    }
+
+    public function logout() {
+        Auth::guard('admin')->logout();
+        return redirect()->route('login');
     }
 }

@@ -44,7 +44,7 @@
                 <form method="POST" action="{{ route('app.admin.extras.create') }}">
                     @csrf
                     <div class="modal-body">
-                        <input name="name" type="text" class="form-control mb-3" placeholder="Numele categoriei">
+                        <input name="name" type="text" class="form-control mb-3" placeholder="Nume extra">
                         <select name="product" class="form-control mb-3" id="product">
                             <option selected>Selecteaza produsul</option>
                             @foreach($products as $product)

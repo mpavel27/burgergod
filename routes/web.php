@@ -19,24 +19,31 @@ use App\Http\Controllers\AccountController;
 
 Route::get('/', [UserController::class, 'viewHomepage'])->name('app.home');
 Route::get('/item/{id}', [UserController::class, 'viewItem'])->name('app.item');
-Route::post('/loginValidation', [UserController::class, 'login'])->middleware('guest')->name('app.login');
-Route::post('/registerValidation', [UserController::class, 'register'])->middleware('guest')->name('app.register');
+Route::post('/loginValidation', [UserController::class, 'login'])->name('app.login');
+Route::post('/registerValidation', [UserController::class, 'register'])->name('app.register');
 Route::get('/logout', [UserController::class, 'logout'])->name('app.logout');
 
 Route::prefix('/account')->middleware('auth')->group(function () {
     Route::get('/', [AccountController::class, 'viewAccount'])->name('app.account');
 });
 
+Route::prefix('/cart')->group(function () {
+    Route::get('/', [UserController::class, 'viewCart'])->name('app.cart');
+    Route::post('/add', [UserController::class, 'addToCart'])->name('app.cart.add');
+    Route::post('/remove/{index}', [UserController::class, 'removeFromCart'])->name('app.cart.remove');
+});
+
 
 Route::prefix('/admin')->group(function () {
-    Route::get('/', [AdminController::class, 'viewAdminIndex'])->name('app.admin.dashboard')->middleware('auth');
+    Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');
+    Route::get('/', [AdminController::class, 'viewAdminIndex'])->name('app.admin.dashboard')->middleware(['auth:admin', 'isAdmin']);
 
     Route::prefix('login')->group(function () {
-        Route::get('/', [AdminController::class, 'viewLogin'])->name('login')->middleware('guest');
-        Route::post('/validate', [AdminController::class, 'login'])->middleware('guest')->name('app.admin.login.post');
+        Route::get('/', [AdminController::class, 'viewLogin'])->name('login')->middleware('guest:admin');
+        Route::post('/validate', [AdminController::class, 'login'])->middleware('guest:admin')->name('app.admin.login.post');
     });
 
-    Route::prefix('items')->middleware('auth')->group(function () {
+    Route::prefix('items')->middleware(['auth:admin', 'isAdmin'])->group(function () {
         Route::get('/', [AdminController::class, 'viewItems'])->name('app.admin.items');
         Route::post('/create', [AdminController::class, 'createItem'])->name('app.admin.item.create');
         Route::get('/delete/{itemId}', [AdminController::class, 'deleteItem'])->name('app.admin.item.delete');
@@ -44,7 +51,7 @@ Route::prefix('/admin')->group(function () {
         Route::post('/edit/{itemId}/validate', [AdminController::class, 'editItemValidation'])->name('app.admin.item.edit.post');
     });
 
-    Route::prefix('category')->middleware('auth')->group(function () {
+    Route::prefix('category')->middleware(['auth:admin', 'isAdmin'])->group(function () {
         Route::get('/', [AdminController::class, 'viewCategories'])->name('app.admin.categories');
         Route::post('/create', [AdminController::class, 'createCategory'])->name('app.admin.categories.create');
         Route::get('/delete/{categoryId}', [AdminController::class, 'deleteCategory'])->name('app.admin.category.delete');
@@ -52,7 +59,7 @@ Route::prefix('/admin')->group(function () {
         Route::post('/edit/{categoryId}/validate', [AdminController::class, 'editCategoryValidation'])->name('admin.category.edit.post');
     });
 
-    Route::prefix('extras')->middleware('auth')->group(function () {
+    Route::prefix('extras')->middleware(['auth:admin', 'isAdmin'])->group(function () {
         Route::get('/', [AdminController::class, 'viewExtras'])->name('app.admin.extras');
         Route::post('/create', [AdminController::class, 'createExtra'])->name('app.admin.extras.create');
     });
@@ -75,5 +82,9 @@ Route::get('/migrate', function () {
 })->middleware('auth');
 
 Route::get('/websockets', function() {
-    event(new App\Events\Orders('test'));
+//    event(new App\Events\Orders('test'));
+    $cart = json_decode(Auth::user()->cart);
+    $sessionCart = json_decode(session('cart'));
+    $full_cart = array_merge($cart, $sessionCart);
+    return dd($full_cart);
 });

@@ -30,6 +30,15 @@
         </li>
     </ul>
     <div class="d-flex justify-content-center flex-column">
+        <a href="{{ route('app.cart') }}" class="btn btn-secondary me-3 text-decoration-none position-relative w-100">
+            <i class="fas fa-shopping-cart"></i>
+            Cos de cumparaturi
+            @if(session('cart'))
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ count(json_decode(session('cart'))) }}
+                    </span>
+            @endif
+        </a>
         @if(Auth::user())
             <a href="#" class="btn btn-secondary my-3">{{ Auth::user()->name }}</a>
         @else
@@ -47,7 +56,7 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link mx-3 active" aria-current="page" href="#">Acasă</a>
+                    <a class="nav-link mx-3 active" aria-current="page" href="{{ route('app.home') }}">Acasă</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" href="#">Despre Noi</a>
@@ -59,16 +68,25 @@
                     <a class="nav-link mx-3" href="#">Contact</a>
                 </li>
             </ul>
-            <div class="d-flex">
-                @if(Auth::user())
+            <div class="d-flex align-items-center">
+                <a href="{{ route('app.cart') }}" class="btn-square btn-secondary me-3 text-decoration-none position-relative">
+                    @if(session('cart'))
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ count(json_decode(session('cart'))) }}
+                    </span>
+                    @endif
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+
+                @if(Auth::user() && Auth::user()->type == 0)
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Detaliile mele</a></li>
-                            <li><a class="dropdown-item" href="#">Adresele mele</a></li>
-                            <li><a class="dropdown-item" href="#">Schimbă parola</a></li>
+                            <li><a class="dropdown-item" href="{{ route('app.account') }}">Detaliile mele</a></li>
+                            <li><a class="dropdown-item" href="{{ route('app.account') }}">Adresele mele</a></li>
+                            <li><a class="dropdown-item" href="{{ route('app.account') }}">Schimbă parola</a></li>
                             <li><a class="dropdown-item" href="{{ route('app.logout') }}">Delogare</a></li>
                         </ul>
                     </div>
