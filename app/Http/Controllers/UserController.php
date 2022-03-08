@@ -123,8 +123,10 @@ class UserController extends Controller
         $items = json_decode(session('cart'));
         array_splice($items, $index, 1);
         session(['cart' => json_encode($items)]);
-        Auth::user()->cart = json_encode($items);
-        Auth::user()->save();
+        if(Auth::check()) {
+            Auth::user()->cart = json_encode($items);
+            Auth::user()->save();
+        }
         toastr()->success('Ai scos cu succes un item din cosul tau de cumparaturi');
         return redirect()->back();
     }

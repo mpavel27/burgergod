@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,10 @@ Route::prefix('/cart')->group(function () {
     Route::get('/', [UserController::class, 'viewCart'])->name('app.cart');
     Route::post('/add', [UserController::class, 'addToCart'])->name('app.cart.add');
     Route::post('/remove/{index}', [UserController::class, 'removeFromCart'])->name('app.cart.remove');
+    Route::post('/validate', [OrderController::class, 'cartPost'])->name('app.cart.post');
+    Route::get('/checkout', [OrderController::class, 'viewCheckout'])->name('app.cart.checkout');
+    Route::post('/checkout/validation', [OrderController::class, 'checkoutPost'])->name('app.cart.checkout.post');
 });
-
 
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');

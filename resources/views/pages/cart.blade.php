@@ -70,21 +70,24 @@
                                 <p class="m-0">0 RON</p>
                             </div>
                         @endif
-                        <div class="border rounded-2 p-3 mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Livrare Acasă
-                                </label>
+                        <form method="POST" action="{{ route('app.cart.post') }}">
+                            @csrf
+                            <div class="border rounded-2 p-3 mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="shipment" value="1" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="shipment">
+                                        Livrare Acasă
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="shipment" value="2" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="shipment">
+                                        Ridicare de la noi
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Ridicare de la noi
-                                </label>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary w-100 mt-3" @if(!is_array($items) || (is_array($items) && count($items) == 0)) disabled="true" @endif>Finalizare comandă</button>
+                            <button type="submit" class="btn btn-primary w-100 mt-3" @if(!is_array($items) || (is_array($items) && count($items) == 0)) disabled="true" @endif>Finalizare comandă</button>
+                        </form>
                     </div>
                 </div>
             </div>
