@@ -5,19 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createExtraRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\AdminLoginRequest as LoginRequest;
 use App\Http\Requests\createCategoryRequest;
 use App\Http\Requests\createItemRequest;
 use App\Http\Requests\editItemRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Items;
+use App\Models\Orders;
 use App\Models\Extras;
 use Hash;
+use DateTime;
+use DateTimeZone;
+
 
 class AdminController extends Controller
 {
     public function viewLogin() {
-//        return Hash::make('UjnIkm321#');
         return view('admin.login');
     }
 
@@ -35,7 +38,8 @@ class AdminController extends Controller
     }
 
     public function viewAdminIndex() {
-        return view('admin.dashboard');
+        $orders = Orders::orderBy('id', 'DESC')->get();
+        return view('admin.dashboard', compact(['orders']));
     }
 
     public function viewItems() {
@@ -185,5 +189,27 @@ class AdminController extends Controller
     public function logout() {
         Auth::guard('admin')->logout();
         return redirect()->route('login');
+    }
+
+    public function orderPost($id, $type) {
+        $date = new DateTime("now", new DateTimeZone('Europe/Bucharest') );
+        $order = Orders::where('id', $id)->first();
+        switch($type) {
+            case 2:
+                $order->status = $type;
+                $order->preparing_date = $date->format('Y-m-d H:i:s');
+                break;
+            case 3:
+                $order->status = $type;
+                $order->dispatching_date = $date->format('Y-m-d H:i:s');
+                break;
+            case 4:
+                $order->status = $type;
+                $order->delivered_date = $date->format('Y-m-d H:i:s');
+                break;
+        }
+        $order->save();
+        event(new \App\Events\OrderDetails($id, $type, $date->format('Y-m-d H:i:s')));
+        return redirect()->back();
     }
 }

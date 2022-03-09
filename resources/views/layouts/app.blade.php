@@ -12,6 +12,7 @@
     <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
 <div id="mobile_navbar" class="mobile-navbar justify-content-between shadow">
@@ -35,8 +36,8 @@
             Cos de cumparaturi
             @if(session('cart'))
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ count(json_decode(session('cart'))) }}
-                    </span>
+                    {{ count(json_decode(session('cart'))) }}
+                </span>
             @endif
         </a>
         @if(Auth::user())

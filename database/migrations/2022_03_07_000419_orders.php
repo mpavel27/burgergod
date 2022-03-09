@@ -26,10 +26,10 @@ class Orders extends Migration
             $table->integer('shipping_type')->comment('1 = home, 2 = local pickup');
             $table->float('sub_total');
             $table->float('delivery_cost');
-            $table->date('placed_time');
-            $table->date('preparing_date');
-            $table->date('dispatching_date');
-            $table->date('delivered_date');
+            $table->dateTime('placed_time');
+            $table->dateTime('preparing_date');
+            $table->dateTime('dispatching_date');
+            $table->dateTime('delivered_date');
             $table->integer('status')->comment('1 = placed, 2 = preparing, 3 = dispatching, 4 = delivered');
             $table->text('cart');
             $table->timestamps();

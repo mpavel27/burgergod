@@ -28,8 +28,8 @@ class OrderRequest extends FormRequest
             'user_name' => 'required|string',
             'user_email' => 'required|email',
             'user_phone_number' => 'required|string|regex:/^[0-9]*$/',
-            'city' => 'required|string',
-            'user_address' => 'required|string',
+            'city' => 'string',
+            'user_address' => 'string',
             'payment' => 'required|string',
         ];
     }

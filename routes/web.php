@@ -37,9 +37,13 @@ Route::prefix('/cart')->group(function () {
     Route::post('/checkout/validation', [OrderController::class, 'checkoutPost'])->name('app.cart.checkout.post');
 });
 
+Route::get('/order/{id}', [OrderController::class, 'viewOrder'])->name('app.order');
+
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');
     Route::get('/', [AdminController::class, 'viewAdminIndex'])->name('app.admin.dashboard')->middleware(['auth:admin', 'isAdmin']);
+
+    Route::post('/send/order/action/{id}/{type}', [AdminController::class, 'orderPost'])->name('app.admin.order.action')->middleware(['auth:admin', 'isAdmin']);
 
     Route::prefix('login')->group(function () {
         Route::get('/', [AdminController::class, 'viewLogin'])->name('login')->middleware('guest:admin');

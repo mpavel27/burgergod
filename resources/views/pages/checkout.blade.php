@@ -14,8 +14,8 @@
                         <input type="tel" class="form-control" name="user_phone_number" placeholder="Număr de telefon" @if(auth()->check()) value="{{ auth()->user()->phone_number }}" @endif>
                         @if(session('shipment_type') == 1)
                         <h6 class="p-3 my-3 rounded-3 fw-bold" style="background-color: var(--primary-color)">Detalii pentru curier <sup class="text-danger">*</sup></h6>
-                        <input type="text" class="form-control" name="city" placeholder="Oraș">
-                        <input type="text" class="form-control my-3" name="user_address" placeholder="Adresă">
+                        <input type="text" class="form-control" name="city" placeholder="Oraș" required>
+                        <input type="text" class="form-control my-3" name="user_address" placeholder="Adresă" required>
                         <textarea class="form-control" name="notes" placeholder="Informații suplimentare (opțional)"></textarea>
                         @endif
                         <h6 class="p-3 my-3 rounded-3 fw-bold" style="background-color: var(--primary-color)">Tipul de plată <sup class="text-danger">*</sup></h6>

@@ -34,15 +34,45 @@
     </div>
     <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        Echo.channel(`ordersChannel`)
-            .listen('Orders', (e) => {
-                console.log(e.message);
-            });
-    </script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
     @toastr_js
-    @toastr_render
+    <script>
+        var source = "{{ asset('assets/sounds/notification2.wav') }}";
+        var audio = new Audio();
+
+        audio.src = source;
+        audio.autoplay = true;
+        audio.loop = true;
+        audio.pause();
+        audio.currentTime = 0;
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": function () {
+                audio.pause();
+                audio.currentTime = 0;
+            },
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "0",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "closeOnHover": false,
+        }
+
+        Echo.channel(`ordersChannel`)
+            .listen('Orders', (e) => {
+                audio.play();
+                toastr.warning(e.message);
+            });
+    </script>
 </body>
 </html>

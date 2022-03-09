@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    $('#app_dataTable').dataTable();
+    $('#app_dataTable').dataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
     $('#admin_categories').dataTable();
 
     if($('#valueId1').prop("checked", true)) {

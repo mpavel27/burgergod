@@ -28,7 +28,6 @@ class UserController extends Controller
     public function login(LoginRequest $request) {
         if($request->validated()) {
             $credentials = $request->only('email', 'password');
-            $credentials['type'] = 0;
             if (Auth::attempt($credentials)) {
                 if(session('cart') && (json_decode(session('cart')) != json_decode(Auth::user()->cart))) {
                     $cart = json_decode(Auth::user()->cart);

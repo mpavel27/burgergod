@@ -382,3 +382,104 @@ body {
     background-color: unset;
     color: #de2828;
 }
+
+.stepper{
+    display:flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 5rem;
+}
+.stepper .step{
+    width:100%;
+    height: 3rem;
+    position:relative;
+
+}
+
+/* .stepper .step:last-child{
+    width: unset;
+} */
+
+.stepper .step .stepIcon i {
+    width: 3rem;
+    height: 3rem;
+    background-color: gray;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: relative;
+}
+
+.stepper .step:not(:last-child) .stepIcon::after{
+    content:"";
+    position: absolute;
+    height: 0.2rem;
+    background-color: gray;
+    left: 50%;
+    top:50%;
+    width:100%;
+    z-index: -1;
+}
+
+.stepper .step.active:not(:last-child) .stepIcon::after{
+    background-color: var(--primary-color);
+}
+
+.stepper .step.complete:not(:last-child) .stepIcon::after{
+    background-color: var(--primary-color);
+}
+
+.stepper .step.complete .stepIcon > i {
+    background-color: var(--primary-color) !important;
+}
+
+.stepper .step.active .stepIcon> i {
+    background-color: var(--primary-color) !important;
+}
+
+
+.stepper .step.active .stepIcon i::after{
+    content:"";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    left: 0;
+    bottom: 0;
+    outline:2px dashed var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 50%;
+    animation: circle 6s linear infinite;
+}
+
+.stepIcon{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.stepper .step .stepIcon p{
+    font-size: 18px;
+}
+
+.stepper .step .stepIcon .date{
+    font-size: 10px;
+    font-weight: 500;
+}
+
+@keyframes circle{
+    0%{
+      transform:rotate(0deg)
+                rotate(0deg);
+
+    }
+    100%{
+      transform:rotate(360deg);
+    }
+  }
+
+
+
+
+
