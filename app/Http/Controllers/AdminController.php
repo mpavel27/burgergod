@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssignOrderRequest;
 use App\Http\Requests\createExtraRequest;
+use App\Http\Requests\markAsPickedUpRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminLoginRequest as LoginRequest;
 use App\Http\Requests\createCategoryRequest;
 use App\Http\Requests\createItemRequest;
 use App\Http\Requests\editItemRequest;
+use App\Http\Requests\SetOrderStatusRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Items;
 use App\Models\Orders;
 use App\Models\Extras;
+use App\Models\User;
 use Hash;
 use DateTime;
 use DateTimeZone;
@@ -39,7 +43,8 @@ class AdminController extends Controller
 
     public function viewAdminIndex() {
         $orders = Orders::orderBy('id', 'DESC')->get();
-        return view('admin.dashboard', compact(['orders']));
+        $deliveryBoys = User::where('type', 1)->get();
+        return view('admin.dashboard', compact(['orders', 'deliveryBoys']));
     }
 
     public function viewItems() {
@@ -211,5 +216,53 @@ class AdminController extends Controller
         $order->save();
         event(new \App\Events\OrderDetails($id, $type, $date->format('Y-m-d H:i:s')));
         return redirect()->back();
+    }
+
+    public function assignOrder(AssignOrderRequest $request) {
+        if($request->validated()) {
+            $date = new DateTime("now", new DateTimeZone('Europe/Bucharest') );
+            $order = Orders::where('id', $request->id_order)->firstOrFail();
+            $order->assigned_to = $request->delivery_boy;
+            $order->status = 3;
+            $order->dispatching_date = $date->format('Y-m-d H:i:s');
+            $order->save();
+            $delivery_boy = User::where('id', $request->delivery_boy)->firstOrFail();
+            $delivery_boy->delivery_presence = 2;
+            $delivery_boy->save();
+            event(new \App\Events\OrderDetails($request->id_order, 3, $date->format('Y-m-d H:i:s')));
+            return redirect()->route('app.admin.dashboard');
+        }
+        return redirect()->back();
+    }
+
+    public function markAsReadyPickUp(SetOrderStatusRequest $request) {
+        if($request->validated()) {
+            $date = new DateTime("now", new DateTimeZone('Europe/Bucharest') );
+            $order = Orders::where('id', $request->id_order)->firstOrFail();
+            $order->dispatching_date = $date->format('Y-m-d H:i:s');
+            $order->status = 3;
+            $order->save();
+            event(new \App\Events\OrderDetails($request->id_order, 3, $date->format('Y-m-d H:i:s')));
+            return redirect()->route('app.admin.dashboard');
+        }
+        return redirect()->back();
+    }
+
+    public function markAsPickedUp(SetOrderStatusRequest $request) {
+        if($request->validated()) {
+            $date = new DateTime("now", new DateTimeZone('Europe/Bucharest') );
+            $order = Orders::where('id', $request->id_order)->firstOrFail();
+            $order->delivered_date = $date->format('Y-m-d H:i:s');
+            $order->status = 4;
+            $order->save();
+            event(new \App\Events\OrderDetails($request->id_order, 4, $date->format('Y-m-d H:i:s')));
+            return redirect()->route('app.admin.dashboard');
+        }
+        return redirect()->back();
+    }
+
+    public function printOrder($id) {
+        $order = Orders::where('id', $id)->firstOrFail();
+        return view('admin.printOrder', compact('order'));
     }
 }

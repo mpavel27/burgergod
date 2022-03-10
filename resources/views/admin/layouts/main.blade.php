@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/admin.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+    <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
 </head>
 <body>
     <div class="d-flex">
@@ -32,7 +33,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
@@ -54,6 +54,7 @@
             "positionClass": "toast-top-right",
             "preventDuplicates": false,
             "onclick": function () {
+
                 audio.pause();
                 audio.currentTime = 0;
             },
@@ -66,6 +67,9 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut",
             "closeOnHover": false,
+            "onHidden": function() {
+                location.reload();
+            }
         }
 
         Echo.channel(`ordersChannel`)

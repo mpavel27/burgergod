@@ -50,6 +50,12 @@ Route::prefix('/admin')->group(function () {
         Route::post('/validate', [AdminController::class, 'login'])->middleware('guest:admin')->name('app.admin.login.post');
     });
 
+    Route::post('assign/delivery', [AdminController::class, 'assignOrder'])->middleware('auth:admin')->name('app.admin.assign.order');
+    Route::post('markAsReadyPickUp', [AdminController::class, 'markAsReadyPickUp'])->middleware('auth:admin')->name('app.admin.mark.pick-up');
+    Route::post('markAsPickedUp', [AdminController::class, 'markAsPickedUp'])->middleware('auth:admin')->name('app.admin.mark.picked-up');
+
+    Route::get('print/{id}', [AdminController::class, 'printOrder'])->middleware('auth:admin')->name('app.admin.print');
+
     Route::prefix('items')->middleware(['auth:admin', 'isAdmin'])->group(function () {
         Route::get('/', [AdminController::class, 'viewItems'])->name('app.admin.items');
         Route::post('/create', [AdminController::class, 'createItem'])->name('app.admin.item.create');

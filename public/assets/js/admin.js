@@ -28,3 +28,15 @@ $(document).ready(function() {
         }
     });
 });
+
+function assignOrder(id) {
+    $('#order_id').attr('value', id);
+}
+
+function finishOrder(id) {
+    $('#finish_order_id').attr('value', id);
+}
+
+function markFinishedOrder(id) {
+    $('#mark_finish_order_id').attr('value', id);
+}

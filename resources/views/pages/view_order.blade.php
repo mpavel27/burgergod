@@ -20,15 +20,23 @@
                 <div id="step_3" class="step {{ ($order->status == 3) ? 'active' : ''}} {{($order->status > 3) ? 'complete' : ''}}">
                     <div class="stepIcon">
                         <i class="fas fa-check"></i>
-                        <p class="my-2">In curs de livrare</p>
+                        @if($order->shipping_type == 2)
+                            <p class="my-2">Gata pentru ridicare</p>
+                        @else
+                            <p class="my-2">In curs de livrare</p>
+                        @endif
                         <p class="m-0 date" id="step_3_date">{{($order->dispatching_date == "0000-00-00 00:00:00") ? 'In lucru' : $order->dispatching_date}}</p>
                     </div>
                 </div>
                 <div id="step_4" class="step {{ ($order->status == 4) ? 'complete' : ''}}">
                      <div class="stepIcon">
-                        <i class="fas fa-check"></i>
-                        <p class="my-2">Livrat</p>
-                        <p class="m-0 date" id="step_4_date">{{($order->delivered_date == "0000-00-00 00:00:00") ? 'In lucru' : $order->delivered_date}}</p>
+                         <i class="fas fa-check"></i>
+                         @if($order->shipping_type == 2)
+                             <p class="my-2">Comanda a fost ridicată</p>
+                         @else
+                             <p class="my-2">Livrat</p>
+                         @endif
+                         <p class="m-0 date" id="step_4_date">{{($order->delivered_date == "0000-00-00 00:00:00") ? 'In lucru' : $order->delivered_date}}</p>
                     </div>
                 </div>
             </div>

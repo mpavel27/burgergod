@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Store;
 use App\Models\Orders;
+use App\Models\User;
 use DateTime;
 use DateTimeZone;
 
@@ -52,7 +53,11 @@ class OrderController extends Controller
                 $order->user_address = $request->user_address;
                 $order->user_email = $request->user_email;
                 $order->payment_type = $request->payment;
-                $order->notes = $request->notes;
+                if($request->notes == null) {
+                    $order->notes = 'NULL';
+                } else {
+                    $order->notes = $request->notes;
+                }
                 $order->city = $request->city;
                 $order->shipping_type = session('shipment_type');
                 $order->sub_total = $total;
@@ -64,7 +69,7 @@ class OrderController extends Controller
                 event(new \App\Events\Orders("A aparut o noua comanda cu id-ul {$order->id}"));
                 session()->forget(['cart', 'shipment_type']);
                 session(['cart' => '[]']);
-                $user = User::where('id', Auth::id());
+                $user = User::where('id', Auth::id())->firstOrFail();
                 $user->cart = '[]';
                 $user->save();
                 if(session('orders')) {

@@ -79,7 +79,7 @@
                     <i class="fas fa-shopping-cart"></i>
                 </a>
 
-                @if(Auth::user() && Auth::user()->type == 0)
+                @if(Auth::user())
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}

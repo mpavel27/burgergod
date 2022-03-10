@@ -21,7 +21,7 @@ class Orders extends Migration
             $table->string('user_address');
             $table->string('user_email');
             $table->string('payment_type')->comment('cash, card');
-            $table->string('notes');
+            $table->string('notes')->default('NULL');
             $table->string('city');
             $table->integer('shipping_type')->comment('1 = home, 2 = local pickup');
             $table->float('sub_total');
