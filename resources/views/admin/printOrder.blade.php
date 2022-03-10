@@ -79,7 +79,7 @@
                 Telefon : <strong>{{ $order->user_phone_number }}</strong></br>
                 @if($order->shipping_type != 2)
                 Adresă : <strong>{{ $order->user_address }}</strong></br>
-                Oraș   : <strong>{{ $order->user_city }}</strong></br>
+                Oraș   : <strong>{{ $order->city }}</strong></br>
                 @endif
             </p>
         </div>
@@ -114,7 +114,9 @@
 <script>
     window.print();
     window.onafterprint = (event) => {
-        window.location = "{{ route('app.admin.dashboard') }}"
+        setTimeout(function () {
+            window.location = "{{ route('app.admin.dashboard') }}"
+        }, 5000)
     };
 </script>
 </body>
