@@ -41,9 +41,9 @@ Route::get('/order/{id}', [OrderController::class, 'viewOrder'])->name('app.orde
 
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');
-    Route::get('/', [AdminController::class, 'viewAdminIndex'])->name('app.admin.dashboard')->middleware(['auth:admin', 'isAdmin']);
+    Route::get('/', [AdminController::class, 'viewAdminIndex'])->name('app.admin.dashboard')->middleware(['auth:admin']);
 
-    Route::post('/send/order/action/{id}/{type}', [AdminController::class, 'orderPost'])->name('app.admin.order.action')->middleware(['auth:admin', 'isAdmin']);
+    Route::post('/send/order/action/{id}/{type}', [AdminController::class, 'orderPost'])->name('app.admin.order.action')->middleware(['auth:admin']);
 
     Route::prefix('login')->group(function () {
         Route::get('/', [AdminController::class, 'viewLogin'])->name('login')->middleware('guest:admin');
@@ -53,6 +53,7 @@ Route::prefix('/admin')->group(function () {
     Route::post('assign/delivery', [AdminController::class, 'assignOrder'])->middleware('auth:admin')->name('app.admin.assign.order');
     Route::post('markAsReadyPickUp', [AdminController::class, 'markAsReadyPickUp'])->middleware('auth:admin')->name('app.admin.mark.pick-up');
     Route::post('markAsPickedUp', [AdminController::class, 'markAsPickedUp'])->middleware('auth:admin')->name('app.admin.mark.picked-up');
+    //Route::post('markAsDelivered', [AdminController::class, 'markAsDelivered'])->middleware(['auth:admin', 'isDeliveryBoy'])->name('app.admin.mark.delivered');
 
     Route::get('print/{id}', [AdminController::class, 'printOrder'])->middleware('auth:admin')->name('app.admin.print');
 
@@ -75,6 +76,11 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('extras')->middleware(['auth:admin', 'isAdmin'])->group(function () {
         Route::get('/', [AdminController::class, 'viewExtras'])->name('app.admin.extras');
         Route::post('/create', [AdminController::class, 'createExtra'])->name('app.admin.extras.create');
+    });
+
+    Route::prefix('/delivery-boys')->middleware(['auth:admin', 'isAdmin'])->group(function () {
+        Route::get('/', [AdminController::class, 'viewDeliveryBoys'])->name('app.admin.delivery-boys');
+        Route::post('/add', [AdminController::class, 'addDeliveryBoy'])->name('app.admin.delivery-boys.post');
     });
 });
 

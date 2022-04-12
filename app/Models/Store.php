@@ -10,4 +10,8 @@ class Store extends Model
     use HasFactory;
 
     protected $table = 'store_settings';
+
+    protected $fillable = [
+        'name',
+    ];
 }

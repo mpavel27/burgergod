@@ -78,9 +78,15 @@
                                 <button onclick="assignOrder({{ $order->id }})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assignOrder">Assign Delivery Boy</button>
                             @endif
                         @elseif($order->status == 3 && $order->assigned_to != 0)
-                            În curs de livrare - {{ $order->delivery_name }}
-                        @else
+                            @if($order->assigned_to == Auth::user()->id)
+                                <button onclick="markAsDelivered({{ $order->id }})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#markAsDelivered">Marcheaza ca livrat</button>
+                            @else
+                                În curs de livrare - {{ $order->delivery_name }}
+                            @endif
+                        @elseif($order->status == 3)
                             <button onclick="markFinishedOrder({{ $order->id }})" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#markedAsFinishedOrder">Marchează ca ridicat</button>
+                        @else
+                            Comanda a fost ridicata/livrata.
                         @endif
                     </div>
                 </td>
@@ -89,6 +95,27 @@
         </tbody>
     </table>
     </div>
+    @if(Auth::user()->type == 1)
+    <div class="modal fade" id="markAsDelivered" tabindex="-1" aria-labelledby="markedAsDeliveredLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="markedAsDeliveredLabel">Marchează ca livrat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('app.admin.mark.picked-up') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <input id="mark_delivered_order_id" type="hidden" name="id_order">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Marchează ca livrat</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="modal fade" id="markedAsFinishedOrder" tabindex="-1" aria-labelledby="markedAsFinishedOrderLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

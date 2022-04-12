@@ -5,23 +5,24 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class AddDeliveryBoyRequest extends FormRequest
 {
     public function authorize()
     {
-        if(auth()->check() && auth()->user()->type == 0){
-            return false;
+        if(auth()->check()){
+            return true;
         }
-        return true;
+        return false;
     }
 
     public function rules()
     {
         return [
-            'name' => 'required|string|max:16',
-            'email' => 'required|string|email|unique:users',
+            'name' => 'required|string',
             'phone_number' => 'required|string',
-            'password' => 'required|string|min:5|confirmed'
+            'email' => 'required|string',
+            'password' => 'required|string',
+            'car_number_plate' => 'required|string'
         ];
     }
 

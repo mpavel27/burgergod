@@ -40,3 +40,7 @@ function finishOrder(id) {
 function markFinishedOrder(id) {
     $('#mark_finish_order_id').attr('value', id);
 }
+
+function markAsDelivered(id) {
+    $('#mark_delivered_order_id').attr('value', id);
+}

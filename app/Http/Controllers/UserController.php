@@ -89,7 +89,10 @@ class UserController extends Controller
             $item = $request->item;
             $extra = $request->except(['item', 'total_price', '_token', 'quantity']);
             $price = $request->total_price;
-            $extras = array_combine(range(1, count($extra)), array_values($extra));
+            if(count($extra) > 0)
+                $extras = array_combine(range(1, count($extra)), array_values($extra));
+            else
+                $extras = null;
             $quantity = $request->quantity;
             $new_extras = [
                 'item' => $item,

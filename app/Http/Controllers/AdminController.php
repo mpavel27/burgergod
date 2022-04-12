@@ -6,12 +6,14 @@ use App\Http\Requests\AssignOrderRequest;
 use App\Http\Requests\createExtraRequest;
 use App\Http\Requests\markAsPickedUpRequest;
 use App\Models\Categories;
+use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminLoginRequest as LoginRequest;
 use App\Http\Requests\createCategoryRequest;
 use App\Http\Requests\createItemRequest;
 use App\Http\Requests\editItemRequest;
 use App\Http\Requests\SetOrderStatusRequest;
+use App\Http\Requests\AddDeliveryBoyRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Items;
 use App\Models\Orders;
@@ -31,7 +33,7 @@ class AdminController extends Controller
     public function login(LoginRequest $request) {
         if ($request->validated()) {
             $credentials = $request->only('email', 'password');
-            $credentials['type'] = 2;
+            $credentials['type'] = 1 || 2;
             if (Auth::guard('admin')->attempt($credentials)) {
                 toastr()->success('Te-ai autentificat cu success');
             } else {
@@ -264,5 +266,30 @@ class AdminController extends Controller
     public function printOrder($id) {
         $order = Orders::where('id', $id)->firstOrFail();
         return view('admin.printOrder', compact('order'));
+    }
+
+    public function viewDeliveryBoys() {
+        $boys = User::where('type', '1')->get();
+        return view('admin.deliveryBoys', compact('boys'));
+    }
+
+    public function addDeliveryBoy(AddDeliveryBoyRequest $request) {
+        if($request->validated()) {
+            $data = $request->except('_token');
+            $data['type'] = 1;
+            $boy = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone_number' => $data['phone_number'],
+                'password' => $data['password'],
+                'type' => $data['type'],
+                'car_number_plate' => $data['car_number_plate']
+            ]);
+            if($boy) {
+                toastr()->success('Ai adaugat cu succes un nou livrator!');
+                return redirect()->back();
+            }
+        }
+        return redirect()->back();
     }
 }
