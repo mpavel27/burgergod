@@ -32,9 +32,15 @@ class AdminController extends Controller
 
     public function login(LoginRequest $request) {
         if ($request->validated()) {
-            $credentials = $request->only('email', 'password');
-            $credentials['type'] = 1 || 2;
-            if (Auth::guard('admin')->attempt($credentials)) {
+            if (Auth::guard('admin')->attempt([
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'type' => 1
+                ]) || Auth::guard('admin')->attempt([
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'type' => 2
+                ])) {
                 toastr()->success('Te-ai autentificat cu success');
             } else {
                 toastr()->error('Ceva nu a mers bine, va rugam sa incercat mai tarziu');
@@ -44,7 +50,10 @@ class AdminController extends Controller
     }
 
     public function viewAdminIndex() {
-        $orders = Orders::orderBy('id', 'DESC')->get();
+        if(Auth::user()->type == 2)
+            $orders = Orders::orderBy('id', 'DESC')->get();
+        else
+            $orders = Orders::orderBy('id', 'DESC')->where('assigned_to', Auth::user()->id)->get();
         $deliveryBoys = User::where('type', 1)->get();
         return view('admin.dashboard', compact(['orders', 'deliveryBoys']));
     }
@@ -150,12 +159,30 @@ class AdminController extends Controller
     }
 
     public function editCategory($categoryId) {
-        $category = Categories::where('id', $categoryId)->get();
-        if(count($category) > 0) {
-            return view('admin.editCategory', compact('category'));
-        } else {
-            abort(404);
+        $category = Categories::where('id', $categoryId)->first();
+        return view('admin.editCategory', compact('category'));
+    }
+
+    public function editDeliveryValidation($deliveryId, AddDeliveryBoyRequest $request) {
+        if($request->validated()) {
+            $category = User::where('id', $deliveryId)->update([
+                'name' => $request->name,
+                'phone_number' => $request->phone_number,
+                'email' => $request->email,
+                'password' => $request->password,
+                'car_number_plate' => $request->car_number_plate
+            ]);
+            if($category) {
+                toastr()->success("Ai editat cu succes livratorul");
+                return redirect()->route('app.admin.delivery-boys');
+            }
         }
+        return redirect()->back();
+    }
+
+    public function editDeliveryBoy($id) {
+        $delivery = User::where('id', $id)->where('type', 1)->first();
+        return view('admin.editDeliveryBoy', compact('delivery'));
     }
 
     public function editCategoryValidation($categoryId, createCategoryRequest $request) {
@@ -232,6 +259,7 @@ class AdminController extends Controller
             $delivery_boy->delivery_presence = 2;
             $delivery_boy->save();
             event(new \App\Events\OrderDetails($request->id_order, 3, $date->format('Y-m-d H:i:s')));
+//            event(new \App\Events\ChangeDeliveryBoy($request->id_order, $request->delivery_boy));
             return redirect()->route('app.admin.dashboard');
         }
         return redirect()->back();
@@ -254,11 +282,13 @@ class AdminController extends Controller
         if($request->validated()) {
             $date = new DateTime("now", new DateTimeZone('Europe/Bucharest') );
             $order = Orders::where('id', $request->id_order)->firstOrFail();
-            $order->delivered_date = $date->format('Y-m-d H:i:s');
-            $order->status = 4;
-            $order->save();
-            event(new \App\Events\OrderDetails($request->id_order, 4, $date->format('Y-m-d H:i:s')));
-            return redirect()->route('app.admin.dashboard');
+            if($order->assigned_to == Auth::user()->id) {
+                $order->delivered_date = $date->format('Y-m-d H:i:s');
+                $order->status = 4;
+                $order->save();
+                event(new \App\Events\OrderDetails($request->id_order, 4, $date->format('Y-m-d H:i:s')));
+                return redirect()->route('app.admin.dashboard');
+            }
         }
         return redirect()->back();
     }
@@ -291,5 +321,10 @@ class AdminController extends Controller
             }
         }
         return redirect()->back();
+    }
+
+    public static function getProductNameById($id) {
+        $item = Items::where('id', $id)->first();
+        return $item->name;
     }
 }

@@ -28,6 +28,8 @@ Route::prefix('/account')->middleware('auth')->group(function () {
     Route::get('/', [AccountController::class, 'viewAccount'])->name('app.account');
 });
 
+Route::get('/meniu', [UserController::class, 'viewMenu'])->name('app.menu');
+
 Route::prefix('/cart')->group(function () {
     Route::get('/', [UserController::class, 'viewCart'])->name('app.cart');
     Route::post('/add', [UserController::class, 'addToCart'])->name('app.cart.add');
@@ -81,6 +83,8 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('/delivery-boys')->middleware(['auth:admin', 'isAdmin'])->group(function () {
         Route::get('/', [AdminController::class, 'viewDeliveryBoys'])->name('app.admin.delivery-boys');
         Route::post('/add', [AdminController::class, 'addDeliveryBoy'])->name('app.admin.delivery-boys.post');
+        Route::get('/edit/{deliveryId}', [AdminController::class, 'editDeliveryBoy'])->name('app.admin.delivery-boys.edit');
+        Route::post('/edit/{deliveryId}/validation', [AdminController::class, 'editDeliveryValidation'])->name('app.admin.delivery-boys.edit.post');
     });
 });
 

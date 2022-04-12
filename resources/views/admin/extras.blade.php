@@ -2,7 +2,7 @@
 @section('admin-container')
     <div class="shadow-lg p-4 rounded-3">
         <div class="d-flex mb-3 justify-content-between">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExtra">Adauga un extra</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExtra">Adaugă un extra</button>
         </div>
         @if(count($extras) > 0)
             <div class="table-responsive">
@@ -11,7 +11,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Nume</th>
-                        <th>Action</th>
+                        <th>Acțiune</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,14 +31,14 @@
                 </table>
             </div>
         @else
-            Nu am gasit nici un extra in baza noastra de date
+            Nu am găsit nici un extra în baza noastră de date
         @endif
     </div>
     <div class="modal fade" id="addExtra" tabindex="-1" aria-labelledby="addExtraLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addExtraLabel">Adauga un extra</h5>
+                    <h5 class="modal-title" id="addExtraLabel">Adaugă un extra</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="{{ route('app.admin.extras.create') }}">
@@ -46,7 +46,7 @@
                     <div class="modal-body">
                         <input name="name" type="text" class="form-control mb-3" placeholder="Nume extra">
                         <select name="product" class="form-control mb-3" id="product">
-                            <option selected>Selecteaza produsul</option>
+                            <option selected>Selectează produsul</option>
                             @foreach($products as $product)
                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
                             @endforeach
@@ -64,12 +64,12 @@
                             </label>
                         </div>
                         <div class="input-group mt-3" id="price">
-                            <input name="price" class="form-control" id="priceInput" placeholder="Pret">
+                            <input name="price" class="form-control" id="priceInput" placeholder="Preț">
                             <span class="input-group-text">RON</span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Creeaza extra</button>
+                        <button type="submit" class="btn btn-primary">Creează extra</button>
                     </div>
                 </form>
             </div>

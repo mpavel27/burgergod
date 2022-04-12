@@ -16,8 +16,8 @@ class UserController extends Controller
 {
     public function viewHomepage() {
         $categories = Categories::with('items')->get();
-        $items = Items::orderBy('id', 'DESC')->get();
-        return view('homepage', compact(['items', 'categories']));
+        $topItems = Items::where('category', 2)->get();
+        return view('homepage', compact(['topItems', 'categories']));
     }
 
     public function viewItem($id) {
@@ -131,5 +131,11 @@ class UserController extends Controller
         }
         toastr()->success('Ai scos cu succes un item din cosul tau de cumparaturi');
         return redirect()->back();
+    }
+
+    public function viewMenu() {
+        $categories = Categories::with('items')->get();
+        $items = Items::orderBy('id', 'DESC')->get();
+        return view('pages.menu', compact(['items', 'categories']));
     }
 }

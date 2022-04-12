@@ -44,3 +44,46 @@ function markFinishedOrder(id) {
 function markAsDelivered(id) {
     $('#mark_delivered_order_id').attr('value', id);
 }
+
+function viewDetails(id, user_name, user_phone_number, user_address, user_email, payment_type, city, shipping_type, sub_total, delivery_cost, placed_time, preparing_date, dispatching_date, delivered_date, cart) {
+    $('#details_form').append('<p class="m-0"><b>Order Id:</b> ' + id + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Nume Prenume:</b> ' + user_name + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Adresa:</b> ' + user_address + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Oras:</b> ' + city + '</p>')
+    $('#details_form').append('<p class="m-0"><b>E-mail client:</b> ' + user_email + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Tip:</b> ' + payment_type + '</p>')
+    if(shipping_type == 1)
+        $('#details_form').append('<p class="m-0"><b>Tip comanda:</b> Livrare</p>')
+    else
+        $('#details_form').append('<p class="m-0"><b>Tip comanda:</b> Ridicare</p>')
+    $('#details_form').append('<p class="m-0"><b>Sub Total:</b> ' + sub_total + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Taxa de livrare:</b> ' + delivery_cost + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Comanda a fost plasata:</b> ' + placed_time + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Comanda a fost preparata:</b> ' + preparing_date + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Comanda a fost trimisa:</b> ' + dispatching_date + '</p>')
+    $('#details_form').append('<p class="m-0"><b>Comanda a fost livrata:</b> ' + delivered_date + '</p>')
+    let data_cart = JSON.parse(cart)
+    $('#details_form').append('<p class="m-0"><b>Cos:</b></p>')
+    data_cart.forEach(cart => {
+        console.log(cart)
+        $('#details_form').append('<p class="m-0">' + cart.name + '</p>')
+    })
+}
+
+$('.details_close').click(function () {
+    $('#details_form').empty();
+});
+
+var isSidebarCollapsed = false;
+
+$('#collapse_button').click(function () {
+    if(isSidebarCollapsed == false) {
+        $('#sidebar').addClass('collpased');
+        $('#content').addClass('collapsed');
+        isSidebarCollapsed = true
+    } else {
+        $('#sidebar').removeClass('collpased');
+        $('#content').removeClass('collapsed');
+        isSidebarCollapsed = false
+    }
+});

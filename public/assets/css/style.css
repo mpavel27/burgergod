@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script:400,700&display=swap');
 
 :root {
-    --primary-color: #f9c41c;
+    --primary-color: #fdca6e;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
     font-weight: 700 !important;
     overflow-x: hidden;
 }
@@ -13,7 +13,7 @@ body {
 .btn-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
-    color: black !important;
+    color: #2e2c36 !important;
 }
 
 .btn {
@@ -22,8 +22,9 @@ body {
 }
 
 .btn-secondary {
-    background-color: black !important;
-    border-color: black !important;
+    background-color: transparent !important;
+    color: #2e2c36 !important;
+    border: 2px solid #ecebf2 !important;
 }
 
 .nav-section {
@@ -196,7 +197,6 @@ body {
 }
 
 .footer {
-    background-color: black;
     padding: 55px 0;
 }
 
@@ -219,7 +219,7 @@ body {
 }
 
 .footer a {
-    color: white !important;
+    color: #646464 !important;
     text-decoration: none !important;
     font-weight: 600;
 }
@@ -231,14 +231,14 @@ body {
 .footer h4 {
     /* margin-left: -18px; */
     font-weight: 600;
-    color: white;
+    color: #2e2c36;
 }
 
 .copyright p {
     margin-bottom: 0;
     text-align: center;
     margin-top: 55px;
-    color: white !important;
+    color: #646464 !important;
     font-weight: 500;
 }
 
@@ -255,7 +255,7 @@ body {
     outline: none;
     border: none;
     background-color: var(--primary-color);
-    color: black;
+    color: #2e2c36;
     width: 50px;
     height: 50px;
     font-size: 22px;
@@ -329,12 +329,13 @@ body {
 }
 
 .btn-square {
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .quantity-group {
@@ -477,9 +478,109 @@ body {
     100%{
       transform:rotate(360deg);
     }
-  }
+}
 
+.navbar_link {
+    text-decoration: unset;
+    color: #2e2c36;
+    font-size: 18px;
+    font-weight: 500;
+}
 
+.navbar_link.active {
+    font-weight: 600;
+}
 
+a:hover {
+    color: #2e2c36 !important;
+}
 
+.feature-bg {
+    box-shadow: 0px 4px 20px #0000000d;
+    border-radius: 10px;
+    padding: 30px 10px;
+}
 
+.top-header h1 {
+    font-size: 56px;
+}
+
+.product-bg img {
+    width: -webkit-fill-available;
+}
+
+.swiper-slide {
+    box-shadow: 0 0 20px #00000014;
+    border-radius: 12px;
+    height: unset !important;
+}
+
+.menu_product_bg {
+    box-shadow: 0 0 20px #0000001a;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.buy-now {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.swiper {
+    padding: 18px !important;
+}
+
+.order-now {
+    position: absolute;
+    top: 35%;
+    right: 40%;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: unset !important;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: var(--swiper-pagination-bullet-opacity, 1);
+    background: white !important;
+}
+
+.category-title {
+    font-family: "Dancing Script";
+    font-weight: 700;
+    font-size: 48px;
+    color: #212529 !important;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 10%;
+    background-color: #212529;
+    left: 45%;
+    bottom: -10px;
+}
+
+section.menu {
+    background-color: var(--primary-color);
+    padding: 20px 0;
+}
+
+.product-bg {
+    background: white;
+    border-radius: 14px;
+    height: 100%;
+}
+
+section.top-header.mt-3 {
+    height: 831px;
+    display: flex;
+    align-items: flex-end;
+}

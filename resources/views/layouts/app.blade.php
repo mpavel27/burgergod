@@ -3,7 +3,8 @@
 <head>
     <title>Burger God</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{{--    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-shims.min.css" media="all">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-font-face.min.css" media="all">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all">
@@ -14,72 +15,32 @@
     <script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
     <script src="{{ asset('js/app.js') }}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
-<div id="mobile_navbar" class="mobile-navbar justify-content-between shadow">
-    <ul class="navbar-nav gap-2">
-        <li class="nav-item">
-            <a class="nav-link mx-3" aria-current="page" href="#">Acasă</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mx-3" href="#">Despre Noi</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mx-3" href="#">Servicii</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mx-3" href="#">Contact</a>
-        </li>
-    </ul>
-    <div class="d-flex justify-content-center flex-column">
-        <a href="{{ route('app.cart') }}" class="btn btn-secondary me-3 text-decoration-none position-relative w-100">
-            <i class="fas fa-shopping-cart"></i>
-            Cos de cumparaturi
-            @if(session('cart'))
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ count(json_decode(session('cart'))) }}
-                </span>
-            @endif
-        </a>
-        @if(Auth::user())
-            <a href="#" class="btn btn-secondary my-3">{{ Auth::user()->name }}</a>
-        @else
-            <button type="button" class="btn btn-secondary my-3" data-bs-toggle="modal" data-bs-target="#loginModal">LOGHEAZĂ-TE</button>
-        @endif
-        <a href="#" class="btn btn-primary">COMANDĂ ACUM</a>
-    </div>
-</div>
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top burgergod-navbar">
+<div class="website_navbar">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="/assets/images/logo-white.png" alt="Burger God" height="90">
-        </a>
-        <button id="navbar-btn" class="toggle-navbar"><i class="fas fa-bars"></i></button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link mx-3 active" aria-current="page" href="{{ route('app.home') }}">Acasă</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-3" href="#">Despre Noi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-3" href="#">Servicii</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-3" href="#">Contact</a>
-                </li>
-            </ul>
-            <div class="d-flex align-items-center">
-                <a href="{{ route('app.cart') }}" class="btn-square btn-secondary me-3 text-decoration-none position-relative">
-                    @if(session('cart'))
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ count(json_decode(session('cart'))) }}
-                    </span>
-                    @endif
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-
+        <div class="d-flex align-items-center justify-content-between py-4">
+            <div class="d-flex">
+                <img src="https://burgergod.ro/wp-content/uploads/2022/01/loard-spin.png" alt="Burger God" height="70" class="me-5">
+                <ul class="list-unstyled d-flex gap-4 m-0 align-items-center">
+                    <li>
+                        <a href="{{ route('app.home') }}" class="navbar_link active">Acasă</a>
+                    </li>
+                    <li>
+                        <a href="" class="navbar_link">Despre Noi</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('app.menu') }}" class="navbar_link">Meniu</a>
+                    </li>
+                    <li>
+                        <a href="" class="navbar_link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="{{ route('app.cart') }}" class="btn-square btn-secondary"><i class="fad fa-shopping-cart"></i></a>
                 @if(Auth::user())
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,21 +54,104 @@
                         </ul>
                     </div>
                 @else
-                    <button type="button" class="btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#loginModal">LOGHEAZĂ-TE</button>
+                    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Loghează-te</a>
                 @endif
-                <a href="#" class="btn btn-primary">COMANDĂ ACUM</a>
             </div>
         </div>
     </div>
-</nav>
-<section class="nav-section d-flex align-items-center">
-    <div class="container mt-5">
-        <h4 class="text-white">Comandă acum</h4>
-        <h3 class="text-white">BURGERI FRESH ȘI GUSTOȘI</h3>
-        <p class="text-white mb-3 fw-lighter">Vrei să știi cum decurg preparatele noastre de la bun la mai bun? Hai să începem!</p>
-        <a href="#" class="btn btn-primary">COMANDĂ ACUM</a>
-    </div>
-</section>
+</div>
+        {{--<div id="mobile_navbar" class="mobile-navbar justify-content-between shadow">--}}
+{{--    <ul class="navbar-nav gap-2">--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link mx-3" aria-current="page" href="#">Acasă</a>--}}
+{{--        </li>--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link mx-3" href="#">Despre Noi</a>--}}
+{{--        </li>--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link mx-3" href="#">Servicii</a>--}}
+{{--        </li>--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link mx-3" href="#">Contact</a>--}}
+{{--        </li>--}}
+{{--    </ul>--}}
+{{--    <div class="d-flex justify-content-center flex-column">--}}
+{{--        <a href="{{ route('app.cart') }}" class="btn btn-secondary me-3 text-decoration-none position-relative w-100">--}}
+{{--            <i class="fas fa-shopping-cart"></i>--}}
+{{--            Cos de cumparaturi--}}
+{{--            @if(session('cart'))--}}
+{{--                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">--}}
+{{--                    {{ count(json_decode(session('cart'))) }}--}}
+{{--                </span>--}}
+{{--            @endif--}}
+{{--        </a>--}}
+{{--        @if(Auth::user())--}}
+{{--            <a href="#" class="btn btn-secondary my-3">{{ Auth::user()->name }}</a>--}}
+{{--        @else--}}
+{{--            <button type="button" class="btn btn-secondary my-3" data-bs-toggle="modal" data-bs-target="#loginModal">LOGHEAZĂ-TE</button>--}}
+{{--        @endif--}}
+{{--        <a href="#" class="btn btn-primary">COMANDĂ ACUM</a>--}}
+{{--    </div>--}}
+{{--</div>--}}
+{{--<nav class="navbar navbar-expand-lg navbar-dark fixed-top burgergod-navbar">--}}
+{{--    <div class="container">--}}
+{{--        <a class="navbar-brand" href="#">--}}
+{{--            <img src="/assets/images/logo-white.png" alt="Burger God" height="90">--}}
+{{--        </a>--}}
+{{--        <button id="navbar-btn" class="toggle-navbar"><i class="fas fa-bars"></i></button>--}}
+{{--        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">--}}
+{{--            <ul class="navbar-nav">--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link mx-3 active" aria-current="page" href="{{ route('app.home') }}">Acasă</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link mx-3" href="#">Despre Noi</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link mx-3" href="#">Servicii</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link mx-3" href="#">Contact</a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--            <div class="d-flex align-items-center">--}}
+{{--                <a href="{{ route('app.cart') }}" class="btn-square btn-secondary me-3 text-decoration-none position-relative">--}}
+{{--                    @if(session('cart'))--}}
+{{--                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">--}}
+{{--                        {{ count(json_decode(session('cart'))) }}--}}
+{{--                    </span>--}}
+{{--                    @endif--}}
+{{--                    <i class="fas fa-shopping-cart"></i>--}}
+{{--                </a>--}}
+
+{{--                @if(Auth::user())--}}
+{{--                    <div class="dropdown">--}}
+{{--                        <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">--}}
+{{--                            {{ Auth::user()->name }}--}}
+{{--                        </button>--}}
+{{--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">--}}
+{{--                            <li><a class="dropdown-item" href="{{ route('app.account') }}">Detaliile mele</a></li>--}}
+{{--                            <li><a class="dropdown-item" href="{{ route('app.account') }}">Adresele mele</a></li>--}}
+{{--                            <li><a class="dropdown-item" href="{{ route('app.account') }}">Schimbă parola</a></li>--}}
+{{--                            <li><a class="dropdown-item" href="{{ route('app.logout') }}">Delogare</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                @else--}}
+{{--                    <button type="button" class="btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#loginModal">LOGHEAZĂ-TE</button>--}}
+{{--                @endif--}}
+{{--                <a href="#" class="btn btn-primary">COMANDĂ ACUM</a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</nav>--}}
+{{--<section class="nav-section d-flex align-items-center">--}}
+{{--    <div class="container mt-5">--}}
+{{--        <h4 class="text-white">Comandă acum</h4>--}}
+{{--        <h3 class="text-white">BURGERI FRESH ȘI GUSTOȘI</h3>--}}
+{{--        <p class="text-white mb-3 fw-lighter">Vrei să știi cum decurg preparatele noastre de la bun la mai bun? Hai să începem!</p>--}}
+{{--        <a href="#" class="btn btn-primary">COMANDĂ ACUM</a>--}}
+{{--    </div>--}}
+{{--</section>--}}
 @yield('main-container')
 <footer class="footer">
     <div class="container">
@@ -149,7 +193,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>Website dezvoltat de către <a href="https://eway-design.com/">Eway-Design</a> & Găzduit de catre <a href="https://softserver.ro/">Soft-Server</a></p>
+            <p>Website dezvoltat de către <a href="https://eway-design.com/">Eway-Design</a> & Găzduit de catre <a href="https://softserver.ro/">SoftServer</a></p>
         </div>
     </div>
 </footer>

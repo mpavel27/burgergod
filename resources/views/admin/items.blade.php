@@ -2,7 +2,7 @@
 @section('admin-container')
     <div class="shadow-lg p-4 rounded-3">
         <div class="d-flex mb-3 justify-content-between">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Adauga un produs</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Adaugă un produs</button>
         </div>
         @if(count($items) > 0)
         <div class="table-responsive">
@@ -13,9 +13,9 @@
                     <th>Nume</th>
                     <th>Categorie</th>
                     <th>Descriere</th>
-                    <th>Pret</th>
+                    <th>Preț</th>
                     <th>Imagine</th>
-                    <th>Actiune</th>
+                    <th>Acțiune</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,14 +39,14 @@
             </table>
         </div>
         @else
-            Nu am gasit nici un produs in baza noastra de date
+            Nu am găsit nici un produs în baza noastră de date
         @endif
     </div>
     <div class="modal fade" id="addItem" tabindex="-1" aria-labelledby="addItemLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addItemLabel">Adauga un nou produs</h5>
+                    <h5 class="modal-title" id="addItemLabel">Adaugă un nou produs</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="{{ route('app.admin.item.create') }}" enctype="multipart/form-data">
@@ -55,22 +55,22 @@
                         <input name="name" type="text" class="form-control mb-3" placeholder="Numele produsului">
                         <textarea name="description" class="form-control mb-3" placeholder="Descriere"></textarea>
                         <div class="form-group mb-3">
-                            <label for="imageLabel">Upload your image</label>
+                            <label for="imageLabel">Încarcă o imagine</label>
                             <input type="file" name="image" class="form-control-file" id="imageLabel">
                         </div>
                         <div class="input-group mb-3">
-                            <input name="price" class="form-control" placeholder="Pret">
+                            <input name="price" class="form-control" placeholder="Preț">
                             <span class="input-group-text">RON</span>
                         </div>
                         <select name="category" class="form-control">
-                            <option selected>Selecteaza o categorie</option>
+                            <option selected>Selectează o categorie</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Creeaza produsul</button>
+                        <button type="submit" class="btn btn-primary">Creează produsul</button>
                     </div>
                 </form>
             </div>

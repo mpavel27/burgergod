@@ -97,6 +97,7 @@
         <tr>
             <td class="quantity">{{ $cart->quantity }}x</td>
             <td class="description">{{ \App\Models\Items::where('id', $cart->item)->first()->name }}</td>
+{{--            <td class="extra"></td>--}}
             <td class="price">{{ \App\Models\Items::where('id', $cart->item)->first()->price }}<br>lei</td>
         </tr>
         @endforeach

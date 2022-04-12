@@ -11,9 +11,9 @@
                     <tr>
                         <th>Id</th>
                         <th>Nume</th>
-                        <th>Placuta de inmatriculare</th>
+                        <th>Număr de înmatriculare</th>
                         <th>Comenzi livrate</th>
-                        <th>Action</th>
+                        <th>Acțiune</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,7 +26,7 @@
                             <td>
                                 <div class="d-flex">
                                     <a href="" class="btn-square btn-danger me-2"><i class="fas fa-trash-alt"></i></a>
-                                    <a href="" class="btn-square btn-secondary"><i class="fas fa-pen"></i></a>
+                                    <a href="{{ route('app.admin.delivery-boys.edit', ['deliveryId' => $boy->id]) }}" class="btn-square btn-secondary"><i class="fas fa-pen"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -35,14 +35,14 @@
                 </table>
             </div>
         @else
-            Nu am gasit nici un livrator in baza noastra de date
+            Nu am găsit nici un livrator în baza noastră de date
         @endif
     </div>
     <div class="modal fade" id="addDeliveryBoy" tabindex="-1" aria-labelledby="addDeliveryBoyLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addDeliveryBoyLabel">Adauga un livrator</h5>
+                    <h5 class="modal-title" id="addDeliveryBoyLabel">Adaugă un livrator</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="{{ route('app.admin.delivery-boys.post') }}">
@@ -50,12 +50,12 @@
                     <div class="modal-body">
                         <input name="name" type="text" class="form-control mb-3" placeholder="Nume Prenume">
                         <input name="phone_number" type="text" class="form-control mb-3" placeholder="Numar de telefon">
-                        <input name="email" type="email" class="form-control mb-3" placeholder="Adresa de e-mail">
-                        <input name="password" type="password" class="form-control mb-3" placeholder="Parola">
-                        <input name="car_number_plate" type="text" class="form-control mb-3" placeholder="Placuta masina">
+                        <input name="email" type="email" class="form-control mb-3" placeholder="Adresă de e-mail">
+                        <input name="password" type="password" class="form-control mb-3" placeholder="Parolă">
+                        <input name="car_number_plate" type="text" class="form-control mb-3" placeholder="Număr mașină">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Aduaga un livrator</button>
+                        <button type="submit" class="btn btn-primary">Adaugă un livrator</button>
                     </div>
                 </form>
             </div>

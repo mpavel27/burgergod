@@ -11,7 +11,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Nume</th>
-                    <th>Action</th>
+                    <th>Acțiune</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,14 +31,14 @@
             </table>
         </div>
         @else
-            Nu am gasit nici o categorie in baza noastra de date
+            Nu s-a găsit nici o categorie în baza noastra de date
         @endif
     </div>
     <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addCategoryLabel">Adauga o categorie</h5>
+                    <h5 class="modal-title" id="addCategoryLabel">Adaugă o categorie</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="{{ route('app.admin.categories.create') }}">
@@ -47,7 +47,7 @@
                         <input name="name" type="text" class="form-control" placeholder="Numele categoriei">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Creeaza categoria</button>
+                        <button type="submit" class="btn btn-primary">Creează categoria</button>
                     </div>
                 </form>
             </div>

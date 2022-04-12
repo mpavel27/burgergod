@@ -22,8 +22,8 @@
                             </div>
                             <hr>
                         </div>
-                        @if(count($item->extras) > 0)
                         <div class="item-center">
+                            @if(count($item->extras) > 0)
                             <h5 class="m-0">Produse extra</h5>
                             <p class="fw-lighter">Alege-ti produsele extra</p>
                             <div class="border p-3 rounded-3">
@@ -36,13 +36,13 @@
                                     </div>
                                 @endforeach
                             </div>
+                            @endif
                             <div class="quantity-group mt-3">
                                 <button type="button" class="fw-bold" id="deincrement_quantity">-</button>
                                 <input type="text" class="quantity-input" name="quantity" id="quantity-input" value="1" min="1" readonly>
                                 <button type="button" class="fw-bold" id="increment_quantity">+</button>
                             </div>
                         </div>
-                        @endif
                         <div class="item-bottom mt-5">
                             <div class="d-flex justify-content-between align-items-center">
                                 <input type="hidden" name="total_price" id="total_input" value="{{ $item->price }}">
