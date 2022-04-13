@@ -9,14 +9,14 @@
             <div class="col-md-6 mb-3">
                 <div class="menu_product_bg position-relative">
                     <div class="d-flex align-items-center gap-4">
-                        <img src="http://127.0.0.1:8000/items/1649719263.png" height="100">
+                        <img src="{{ asset('items/'.$item->image) }}" height="100">
                         <div>
                             <h3 class="fw-bold">{{ $item->name }}</h3>
                             <p class="fw-normal mb-1">{{ $item->description }}</p>
                             <h3 class="m-0">{{ $item->price }} RON</h3>
                         </div>
                     </div>
-                    <a href="" class="btn-square btn-primary buy-now"><i class="fad fa-shopping-cart"></i></a>
+                    <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn-square btn-primary buy-now"><i class="fad fa-shopping-cart"></i></a>
                 </div>
             </div>
             @endforeach

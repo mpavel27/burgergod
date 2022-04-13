@@ -29,10 +29,15 @@
                             <div class="border p-3 rounded-3">
                                 @foreach($item->extras as $extra)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" data-extra="true" name="extra_{{ $extra->id }}" data-extra-price="{{ $extra->price }}" value="{{ $extra->id }}" id="extra{{ $extra->id }}">
+                                        <input class="form-check-input" type="checkbox" data-extra="true" name="extra_{{ $extra->id }}" data-extra-price-original="{{ $extra->price }}" data-extra-price="{{ $extra->price }}" value="{{ $extra->id }}" id="extra{{ $extra->id }}">
                                         <label class="form-check-label fw-normal" for="extra{{ $extra->id }}">
                                             {{ $extra->name }} - @if($extra->type != 1) {{ $extra->price }} RON @else GRATIS @endif
                                         </label>
+                                        <div class="quantity-group mt-3 d-none">
+                                            <button data-type="deincrement" data-extra-id="{{ $extra->id }}" type="button" class="fw-bold">-</button>
+                                            <input type="text" class="quantity-input" name="quantity_{{ $extra->id }}" id="extra_quantity_{{ $extra->id }}" value="0" min="0" readonly>
+                                            <button data-type="increment" data-extra-id="{{ $extra->id }}" type="button" class="fw-bold">+</button>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
@@ -46,7 +51,7 @@
                         <div class="item-bottom mt-5">
                             <div class="d-flex justify-content-between align-items-center">
                                 <input type="hidden" name="total_price" id="total_input" value="{{ $item->price }}">
-                                <h5 class="m-0">Total: <span id="total">{{ $item->price }}</span>LEI</h5>
+                                <h5 class="m-0">Total: <span id="total">{{ $item->price }}</span> RON</h5>
 {{--                                @statusActive--}}
                                 <button type="submit" class="btn btn-primary">Adaugă în coș</button>
 {{--                                @endstatusActive--}}
@@ -59,6 +64,61 @@
     </section>
     <script>
         $(document).ready(function () {
+            $('button[data-type="deincrement"]').click(function () {
+                let id = $(this).data('extra-id');
+                if(!id) {
+                    return
+                }
+                var extraInput = $(`#extra_quantity_${id}`)
+                if(extraInput) {
+                    let increment = extraInput.val();
+                    if(increment > 1) {
+                        increment--
+                        extraInput.val(increment);
+
+                        let input = $(`input[name="extra_${id}"]`);
+                        let original_price = input.data('extra-price-original');
+                        input.data('extra-price', increment * original_price);
+
+                        let item_price = {{ $item->price }};
+                        let extras = $('input[type="checkbox"]:checked');
+                        let quantity = $('#quantity-input').val();
+                        var total = item_price * quantity;
+                        extras.each(function () {
+                            var value = $(this).data('extra-price');
+                            total += value * quantity
+                        });
+                        $('#total').text(total.toFixed(2));
+                        $('#total_input').val(total.toFixed(2));
+                    }
+                }
+            });
+            $('button[data-type="increment"]').click(function () {
+                let id = $(this).data('extra-id');
+                if(!id) {
+                    return
+                }
+                var extraInput = $(`#extra_quantity_${id}`)
+                if(extraInput) {
+                    let increment = extraInput.val();
+                    increment++
+                    extraInput.val(increment);
+                    let input = $(`input[name="extra_${id}"]`);
+                    let original_price = input.data('extra-price-original');
+                    input.data('extra-price', increment * original_price);
+
+                    let item_price = {{ $item->price }};
+                    let extras = $('input[type="checkbox"]:checked');
+                    let quantity = $('#quantity-input').val();
+                    var total = item_price * quantity;
+                    extras.each(function () {
+                        var value = $(this).data('extra-price');
+                        total += value * quantity
+                    });
+                    $('#total').text(total.toFixed(2));
+                    $('#total_input').val(total.toFixed(2));
+                }
+            });
             if($('#quantity-input').val() == 1) {
                 $('#deincrement_quantity').attr("disabled", true);
             }
@@ -106,11 +166,15 @@
                     total += value * qua
                 });
                 if(this.checked) {
+                    $(this).next().next().removeClass('d-none');
                     $('#total').text(total.toFixed(2));
                     $('#total_input').val(total.toFixed(2));
+                    $(this).next().next().children().val(1);
                 } else {
+                    $(this).next().next().addClass('d-none');
                     $('#total').text(total.toFixed(2));
                     $('#total_input').val(total.toFixed(2));
+                    $(this).next().next().children().val(0);
                 }
             });
         });

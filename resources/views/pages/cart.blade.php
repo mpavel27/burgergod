@@ -31,7 +31,7 @@
                                         <td class="align-middle"><img class="img-fluid cart-image" src="{{ asset('/items/'. \App\Models\Items::where('id', $item->item)->select('image')->first()->image) }}"></td>
                                         <td class="align-middle">{{ \App\Models\Items::where('id', $item->item)->select('name')->first()->name }}</td>
 {{--                                        {{ dd(array_map(function($n){ return \App\Models\Extras::where('id', $n)->select('name')->first(); }, (array)$item->extra)) }}--}}
-                                        <td class="align-middle">{{ implode(", ", array_map(function($n){ return \App\Models\Extras::where('id', $n)->select('name')->first()->name; }, (array)$item->extra)) }}</td>
+                                        <td class="align-middle">{{ implode(", ", array_map(function($n, $item){ return \App\Models\Extras::where('id', $n)->select('name')->first()->name .' x'.$item; }, (array)$item->extra, (array)$item->extraQuantity)) }}</td>
                                         <td class="align-middle">{{ \App\Models\Items::where('id', $item->item)->select('price')->first()->price }} RON</td>
                                         <td class="align-middle">{{ $item->quantity }} buc.</td>
                                         <td class="align-middle">{{ $item->price }} RON</td>

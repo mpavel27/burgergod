@@ -88,16 +88,29 @@ class UserController extends Controller
             $cart = (session('cart')) ? json_decode(session('cart')) : [];
             $item = $request->item;
             $extra = $request->except(['item', 'total_price', '_token', 'quantity']);
+            $extras = array();
+            $extraQuantity = array();
             $price = $request->total_price;
-            if(count($extra) > 0)
-                $extras = array_combine(range(1, count($extra)), array_values($extra));
-            else
-                $extras = null;
+            if(count($extra) > 0) {
+                foreach($extra as $key => $extraFor) {
+                    if(preg_match('/^extra_[0-9]*/', $key)) {
+                        array_push($extras, $extraFor);
+                    } else {
+                        if($extraFor > 0)
+                            array_push($extraQuantity, $extraFor);
+                    }
+                }
+            }
+            array_unshift($extras, "");
+            array_unshift($extraQuantity, "");
+            unset($extras[0]);
+            unset($extraQuantity[0]);
             $quantity = $request->quantity;
             $new_extras = [
                 'item' => $item,
                 'price' => $price,
                 'extra' => $extras,
+                'extraQuantity' => $extraQuantity,
                 'quantity' => $quantity
             ];
             array_push($cart, $new_extras);

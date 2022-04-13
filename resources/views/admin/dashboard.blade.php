@@ -56,11 +56,14 @@
                 @php
                     $cart = $order->cart;
                     $cart = json_decode($cart);
+                    $products = "";
                     foreach ($cart as $cartData) {
                         $cartData->name = \App\Http\Controllers\AdminController::getProductNameById($cartData->item);
+                        $extras = implode(", ", array_map(function($n, $item){ return \App\Models\Extras::where('id', $n)->select('name')->first()->name .' x'.$item; }, (array)$cartData->extra, (array)$cartData->extraQuantity));
+                        $products .= $cartData->name." ".$extras."<br>";
                     }
                 @endphp
-                <td class="align-middle"><button type="button" onclick="viewDetails('{{ $order->id }}', '{{ $order->user_name }}', '{{ $order->user_phone_number }}', '{{ $order->user_address }}', '{{ $order->user_email }}', '{{ $order->payment_type }}', '{{ $order->city }}', '{{ $order->shipping_type }}', '{{ $order->sub_total }}', '{{ $order->delivery_cost }}', '{{ $order->placed_time }}', '{{ $order->preparing_date }}', '{{ $order->dispatching_date }}', '{{ $order->delivered_date }}', '{{ json_encode($cart) }}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewDetails">Vezi mai multe</button></td>
+                <td class="align-middle"><button type="button" onclick="viewDetails('{{ $order->id }}', '{{ $order->user_name }}', '{{ $order->user_phone_number }}', '{{ $order->user_address }}', '{{ $order->user_email }}', '{{ $order->payment_type }}', '{{ $order->city }}', '{{ $order->shipping_type }}', '{{ $order->sub_total }}', '{{ $order->delivery_cost }}', '{{ $order->placed_time }}', '{{ $order->preparing_date }}', '{{ $order->dispatching_date }}', '{{ $order->delivered_date }}', '{{ $products }}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewDetails">Vezi mai multe</button></td>
                 @if(Auth::user()->type == 2)
                 <td class="align-middle"><a href="{{ route('app.admin.print', ['id' => $order->id]) }}" class="btn btn-secondary"><i class="fas fa-print"></i></a></td>
                 @endif

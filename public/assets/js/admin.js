@@ -62,12 +62,8 @@ function viewDetails(id, user_name, user_phone_number, user_address, user_email,
     $('#details_form').append('<p class="m-0"><b>Comanda a fost preparata:</b> ' + preparing_date + '</p>')
     $('#details_form').append('<p class="m-0"><b>Comanda a fost trimisa:</b> ' + dispatching_date + '</p>')
     $('#details_form').append('<p class="m-0"><b>Comanda a fost livrata:</b> ' + delivered_date + '</p>')
-    let data_cart = JSON.parse(cart)
     $('#details_form').append('<p class="m-0"><b>Cos:</b></p>')
-    data_cart.forEach(cart => {
-        console.log(cart)
-        $('#details_form').append('<p class="m-0">' + cart.name + '</p>')
-    })
+    $('#details_form').append('<p class="m-0">' + cart + '</p>')
 }
 
 $('.details_close').click(function () {

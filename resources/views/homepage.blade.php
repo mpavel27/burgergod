@@ -49,7 +49,7 @@
                 @foreach($topItems as $item)
                 <div class="swiper-slide">
                     <div class="product-bg text-center position-relative">
-                        <img src="http://127.0.0.1:8000/items/1649719263.png">
+                        <img src="{{ asset('items/'.$item->image) }}">
                         <div class="p-3">
                             <h5 class="fw-bold">{{ $item->name }}</h5>
                             <p class="fw-normal">{{ $item->description }}</p>
