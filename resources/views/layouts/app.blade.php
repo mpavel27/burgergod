@@ -34,6 +34,11 @@
     </style>
 </head>
 <body>
+<div class="order-notifications">
+    <div class="bg-warning p-4">
+        <p class="m-0">Ai o comanda in curs de procesare</p>
+    </div>
+</div>
 <div class="mobile_navbar d-flex flex-column align-items-center">
     <a href="{{ route('app.home') }}">
         <img src="{{ asset('assets/images/logo.png') }}" alt="Burger God" height="80">
