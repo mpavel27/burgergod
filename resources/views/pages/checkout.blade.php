@@ -5,7 +5,7 @@
             <form method="POST" action="{{ route('app.cart.checkout.post') }}" class="row">
                 @csrf
                 <div class="col-xl-8">
-                    <div class="shadow p-4 rounded-3">
+                    <div class="border p-4 rounded-3 mb-3">
                         <h4>Finalizare comandă</h4>
                         <hr>
                         <h6 class="p-3 my-3 rounded-3 fw-bold" style="background-color: var(--primary-color)">Informatii personale <sup class="text-danger">*</sup></h6>

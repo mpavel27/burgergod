@@ -151,4 +151,12 @@ class UserController extends Controller
         $items = Items::orderBy('id', 'DESC')->get();
         return view('pages.menu', compact(['items', 'categories']));
     }
+
+    public function viewAboutUs() {
+        return view('pages.about_us');
+    }
+
+    public function viewContact() {
+        return view('pages.contact');
+    }
 }

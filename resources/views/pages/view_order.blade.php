@@ -2,7 +2,8 @@
 @section('main-container')
     <section class="view-order py-4">
         <div class="container">
-            <div class="stepper">
+            @if($order->status != 5)
+            <div class="stepper" id="stepper">
                 <div id="step_1" class="step {{ ($order->status > 1) ? 'complete' : 'active' }}">
                     <div class="stepIcon">
                         <i class="fas fa-check"></i>
@@ -40,6 +41,8 @@
                     </div>
                 </div>
             </div>
+            @endif
+            <h4 class="text-center mb-4 {{ ($order->status != 5) ? 'd-none' : ''}}" id="reject_order"><i class="fas fa-exclamation-triangle text-danger"></i> Comanda dvs. a fost refuzată, ne pare rău vă rugăm să reveniți mai târziu.</h4>
             <div class="row">
                 <div class="col-lg-8 mb-4">
                     <div class="shadow border p-4 rounded-3">
@@ -125,7 +128,10 @@
                 var active = $('.active');
                 active.removeClass('active');
                 active.addClass('complete');
-                if(e.update == 4) {
+                if (e.update == 5) {
+                    $('#stepper').hide();
+                    $('#reject_order').removeClass('d-none');
+                } else if(e.update == 4) {
                     $('#step_' + e.update).addClass('complete');
                 } else {
                     $('#step_' + e.update).addClass('active');

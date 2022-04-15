@@ -83,7 +83,10 @@
                             @csrf
                             <button type='submit' class="btn btn-success">Acceptă</button>
                         </form>
-                        <button class="btn btn-warning mx-3">Respinge</button>
+                        <form method="POST" action="{{ route('app.admin.order.action', ['id' => $order->id, 'type' => 5]) }}">
+                            @csrf
+                            <button class="btn btn-warning mx-3">Respinge</button>
+                        </form>
                         @elseif($order->status == 2)
                             @if($order->shipping_type == 2)
                                 <button onclick="finishOrder({{ $order->id }})" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#finishOrder">Se poate ridica</button>
@@ -98,8 +101,10 @@
                             @endif
                         @elseif($order->status == 3)
                             <button onclick="markFinishedOrder({{ $order->id }})" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#markedAsFinishedOrder">Marchează ca ridicat</button>
-                        @else
+                        @elseif($order->status == 4)
                             Comanda a fost ridicată/livrată.
+                        @else
+                            Comanda a fost refuzată.
                         @endif
                     </div>
                 </td>

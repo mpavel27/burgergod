@@ -82,12 +82,18 @@ class AdminController extends Controller
 
     public function createItem(createItemRequest $request) {
         if($request->validated()) {
+            if (!$request->has('image')) {
+                return response()->json(['message' => 'Produsul trebuie sa aiba o imagine'], 422);
+            }
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('items'), $imageName);
+//            return dd($request->all());
             $create = Items::insert([
                 'name' => $request->name,
                 'category' => $request->category,
                 'description' => $request->description,
+                'grams' => $request->grams,
+                'calories' => $request->calories,
                 'price' => $request->price,
                 'image' => $imageName
             ]);
@@ -100,22 +106,17 @@ class AdminController extends Controller
     }
 
     public function deleteItem($itemId) {
-        $itemName = Items::where('id', $itemId)->get();
         $item = Items::where('id', $itemId)->delete();
         if($item) {
-            toastr()->success("Ai sters cu succes produsul {$itemName->name}");
+            toastr()->success("Ai sters cu succes produsul");
             return redirect()->back();
         }
     }
 
     public function editItem($itemId) {
-        $item = Items::where('id', $itemId)->get();
+        $item = Items::where('id', $itemId)->first();
         $categories = Categories::get();
-        if(count($item) > 0) {
-            return view('admin.editItem', compact(['item', 'categories']));
-        } else {
-            abort(404);
-        }
+        return view('admin.editItem', compact(['item', 'categories']));
     }
 
     public function editItemValidation($itemId, editItemRequest $request) {
@@ -125,6 +126,8 @@ class AdminController extends Controller
                     'name' => $request->name,
                     'category' => $request->category,
                     'description' => $request->description,
+                    'grams' => $request->grams,
+                    'calories' => $request->calories,
                     'price' => $request->price
                 ]);
                 if ($item) {
@@ -138,6 +141,8 @@ class AdminController extends Controller
                     'name' => $request->name,
                     'category' => $request->category,
                     'description' => $request->description,
+                    'grams' => $request->grams,
+                    'calories' => $request->calories,
                     'price' => $request->price,
                     'image' => $imageName
                 ]);
@@ -241,6 +246,9 @@ class AdminController extends Controller
                 $order->status = $type;
                 $order->delivered_date = $date->format('Y-m-d H:i:s');
                 break;
+            case 5:
+                $order->status = $type;
+                $order->preparing_date = $date->format('Y-m-d H:i:s');
         }
         $order->save();
         event(new \App\Events\OrderDetails($id, $type, $date->format('Y-m-d H:i:s')));

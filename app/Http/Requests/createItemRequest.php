@@ -21,6 +21,8 @@ class createItemRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'grams' => 'required|numeric',
+            'calories' => 'required|numeric',
             'category' => 'required|integer',
             'image' => 'required|mimes:jpg,png,jpeg'
         ];

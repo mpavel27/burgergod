@@ -2,6 +2,19 @@
 @section('main-container')
 <section class="menu-page">
     <div class="container">
+        <div class="nav-breadcrumb my-4">
+            <ul class="list-unstyled m-0 d-flex flex-row gap-4">
+                <li>
+                    <a class="page" href="{{ route('app.home') }}">Acasă</a>
+                </li>
+                <li class="d-flex align-items-center">
+                    <i class="fas fa-circle separator"></i>
+                </li>
+                <li>
+                    <a class="current-page" href="{{ Request::url() }}">Meniu</a>
+                </li>
+            </ul>
+        </div>
         @foreach($categories as $category)
         <h3 class="fw-bold my-4">{{ $category->name }}</h3>
         <div class="row">
@@ -10,12 +23,21 @@
                 <div class="menu_product_bg position-relative">
                     <div class="d-flex align-items-center gap-4">
                         <img src="{{ asset('items/'.$item->image) }}" height="100">
-                        <div>
-                            <h3 class="fw-bold">{{ $item->name }}</h3>
-                            <p class="fw-normal mb-1">{{ $item->description }}</p>
-                            <h3 class="m-0">{{ $item->price }} RON</h3>
+                        <div class="product-desc">
+                            <div>
+                                <h3 class="fw-bold">{{ $item->name }}</h3>
+                                <p class="fw-normal mb-1">{{ $item->description }}</p>
+                            </div>
+                            <h3 class="m-0">{{ explode(".", strval(number_format($item->price, 2)))[0] }}<sup>.{{ explode(".", strval(number_format($item->price, 2)))[1] }}</sup> RON</h3>
                         </div>
                     </div>
+                    @if($item->calories != 0 && $item->grams != 0)
+                    <div type="button" class="item-info" data-tooltip="Grame: {{ $item->grams }} | Calorii: {{ $item->calories }}"><i class="fas fa-info"></i></div>
+                    @elseif($item->calories > 0)
+                        <div type="button" class="item-info" data-tooltip="Calorii: {{ $item->calories }}"><i class="fas fa-info"></i></div>
+                    @elseif($item->grams > 0)
+                        <div type="button" class="item-info" data-tooltip="Grame: {{ $item->grams }}"><i class="fas fa-info"></i></div>
+                    @endif
                     <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn-square btn-primary buy-now"><i class="fad fa-shopping-cart"></i></a>
                 </div>
             </div>
@@ -25,26 +47,3 @@
     </div>
 </section>
 @endsection
-{{--@section('main-container')--}}
-{{--    <section class="about">--}}
-{{--        @foreach($categories as $category)--}}
-{{--            <div class="container">--}}
-{{--                <div class="text-center mt-5 mb-5">--}}
-{{--                    <h4 class="mb-3">{{ $category->name }}</h4>--}}
-{{--                    <h5 class="text-uppercase fw-bold mt-3">Preparatele noastre</h5>--}}
-{{--                </div>--}}
-{{--                <div class="row">--}}
-{{--                    @foreach($category->items as $item)--}}
-{{--                        <div class="col-lg-3 mb-4">--}}
-{{--                            <div class="burger-image">--}}
-{{--                                <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn btn-primary">COMANDĂ</a>--}}
-{{--                                <img src="{{ asset('items/'.$item->image) }}" height="250">--}}
-{{--                            </div>--}}
-{{--                            <p class="burger-title text-center mt-2">{{ $item->name }}</p>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
-{{--    </section>--}}
-{{--@endsection--}}

@@ -5,50 +5,83 @@
             <h4 class="mb-3">Coș cu cumpărături</h4>
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="shadow border rounded-3 p-3 mb-3">
-                        <table class="table table-responsive">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col">Produs</th>
-                                    <th scope="col">Extra</th>
-                                    <th scope="col">Pret</th>
-                                    <th scope="col">Cantitate</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @if(is_array($items) && count($items) > 0)
-                                @foreach($items as $key => $item)
-                                    <tr>
-                                        <th scope="row" class="align-middle">
-                                            <form method="POST" action="{{ route('app.cart.remove', ['index' => $key]) }}">
-                                                @csrf
-                                                <button type="submit" class="delete-product"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </th>
-                                        <td class="align-middle"><img class="img-fluid cart-image" src="{{ asset('/items/'. \App\Models\Items::where('id', $item->item)->select('image')->first()->image) }}"></td>
-                                        <td class="align-middle">{{ \App\Models\Items::where('id', $item->item)->select('name')->first()->name }}</td>
-{{--                                        {{ dd(array_map(function($n){ return \App\Models\Extras::where('id', $n)->select('name')->first(); }, (array)$item->extra)) }}--}}
-                                        <td class="align-middle">{{ implode(", ", array_map(function($n, $item){ return \App\Models\Extras::where('id', $n)->select('name')->first()->name .' x'.$item; }, (array)$item->extra, (array)$item->extraQuantity)) }}</td>
-                                        <td class="align-middle">{{ \App\Models\Items::where('id', $item->item)->select('price')->first()->price }} RON</td>
-                                        <td class="align-middle">{{ $item->quantity }} buc.</td>
-                                        <td class="align-middle">{{ $item->price }} RON</td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="7">Nu ai nici un produs in cosul tau de cumparaturi</td>
-                                </tr>
-                            @endif
-                            </tbody>
-                        </table>
+                    <div class="shopping-cart-bg">
+                        @if(is_array($items) && count($items) > 0)
+                            @foreach($items as $key => $item)
+                                <div class="cart-item">
+                                    <div class="d-flex justify-content-center align-items-center gap-4">
+                                        <img src="{{ asset('/items/'. \App\Models\Items::where('id', $item->item)->select('image')->first()->image) }}" height="80">
+                                        <div>
+                                            <h4 class="m-0 fw-bold item-title">{{ \App\Models\Items::where('id', $item->item)->select('name')->first()->name }}</h4>
+                                            <p class="m-0 fw-normal text-muted">{{ implode(", ", array_map(function($n, $item){ return \App\Models\Extras::where('id', $n)->select('name')->first()->name .' x'.$item; }, (array)$item->extra, (array)$item->extraQuantity)) }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center">
+                                        <p class="m-0 fw-normal text-muted">Cantitate</p>
+                                        <h4 class="m-0 fw-bold">{{ $item->quantity }}</h4>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center">
+                                        <p class="m-0 fw-normal text-muted">Preț</p>
+                                        <h4 class="m-0 text-center">{{ explode(".", strval(number_format($item->price, 2)))[0] }}<sup>.{{ explode(".", strval(number_format($item->price, 2)))[1] }}</sup> <strong>RON</strong></h4>
+                                    </div>
+                                    <div>
+                                        <form method="POST" action="{{ route('app.cart.remove', ['index' => $key]) }}">
+                                            @csrf
+                                            <button type="submit" class="delete-product text-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="cart-item">
+                                <p class="m-0 text-muted fw-normal">În prezent nu ai nici un produs în coșul tău de cumpărături</p>
+                            </div>
+                        @endif
                     </div>
+{{--                    <div class="border rounded-3 p-3 mb-3 table-responsive">--}}
+{{--                        <table class="table m-0">--}}
+{{--                            <thead>--}}
+{{--                                <tr>--}}
+{{--                                    <th scope="col"></th>--}}
+{{--                                    <th scope="col"></th>--}}
+{{--                                    <th scope="col">Produs</th>--}}
+{{--                                    <th scope="col">Extra</th>--}}
+{{--                                    <th scope="col">Preț</th>--}}
+{{--                                    <th scope="col">Cantitate</th>--}}
+{{--                                    <th scope="col">Total</th>--}}
+{{--                                </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+{{--                            @if(is_array($items) && count($items) > 0)--}}
+{{--                                @foreach($items as $key => $item)--}}
+{{--                                    <tr>--}}
+{{--                                        <th scope="row" class="align-middle">--}}
+{{--                                            <form method="POST" action="{{ route('app.cart.remove', ['index' => $key]) }}">--}}
+{{--                                                @csrf--}}
+{{--                                                <button type="submit" class="delete-product text-danger"><i class="fas fa-trash"></i></button>--}}
+{{--                                            </form>--}}
+{{--                                        </th>--}}
+{{--                                        <td class="align-middle"><img class="img-fluid cart-image" src="{{ asset('/items/'. \App\Models\Items::where('id', $item->item)->select('image')->first()->image) }}"></td>--}}
+{{--                                        <td class="align-middle">{{ \App\Models\Items::where('id', $item->item)->select('name')->first()->name }}</td>--}}
+{{--                                        {{ dd(array_map(function($n){ return \App\Models\Extras::where('id', $n)->select('name')->first(); }, (array)$item->extra)) }}--}}
+{{--                                        <td class="align-middle">{{ implode(", ", array_map(function($n, $item){ return \App\Models\Extras::where('id', $n)->select('name')->first()->name .' x'.$item; }, (array)$item->extra, (array)$item->extraQuantity)) }}</td>--}}
+{{--                                        <td class="align-middle">{{ \App\Models\Items::where('id', $item->item)->select('price')->first()->price }} RON</td>--}}
+{{--                                        <td class="align-middle">{{ $item->quantity }} buc.</td>--}}
+{{--                                        <td class="align-middle">{{ $item->price }} RON</td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                            @else--}}
+{{--                                <tr>--}}
+{{--                                    <td colspan="7" class="text-center py-4">În prezent nu ai nici un produs în coșul tău de cumpărături</td>--}}
+{{--                                </tr>--}}
+{{--                            @endif--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+{{--                    </div>--}}
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="rounded-2 border p-4">
+                    <div class="checkout-details p-4">
                         <h4>Detalii Cumpărături</h4>
                         <hr>
                         @if(is_array($items) && count($items) > 0)

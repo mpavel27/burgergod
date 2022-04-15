@@ -40,6 +40,9 @@ Route::prefix('/cart')->group(function () {
 });
 
 Route::get('/order/{id}', [OrderController::class, 'viewOrder'])->name('app.order');
+Route::get('/orders', [OrderController::class, 'viewSessionOrders'])->name('app.orders');
+Route::get('/despre-noi', [UserController::class, 'viewAboutUs'])->name('app.about-us');
+Route::get('/contact', [UserController::class, 'viewContact'])->name('app.contact');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');
@@ -55,6 +58,7 @@ Route::prefix('/admin')->group(function () {
     Route::post('assign/delivery', [AdminController::class, 'assignOrder'])->middleware('auth:admin')->name('app.admin.assign.order');
     Route::post('markAsReadyPickUp', [AdminController::class, 'markAsReadyPickUp'])->middleware('auth:admin')->name('app.admin.mark.pick-up');
     Route::post('markAsPickedUp', [AdminController::class, 'markAsPickedUp'])->middleware('auth:admin')->name('app.admin.mark.picked-up');
+//    Route::post('rejectOrder', [AdminController::class, 'rejectOrder'])->middleware('auth:admin')->name('app.admin.mark.reject');
     //Route::post('markAsDelivered', [AdminController::class, 'markAsDelivered'])->middleware(['auth:admin', 'isDeliveryBoy'])->name('app.admin.mark.delivered');
 
     Route::get('print/{id}', [AdminController::class, 'printOrder'])->middleware('auth:admin')->name('app.admin.print');
@@ -105,7 +109,6 @@ Route::get('/migrate', function () {
 })->middleware('auth');
 
 Route::get('/websockets', function() {
-//    event(new App\Events\Orders('test'));
     $cart = json_decode(Auth::user()->cart);
     $sessionCart = json_decode(session('cart'));
     $full_cart = array_merge($cart, $sessionCart);

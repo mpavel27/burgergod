@@ -54,6 +54,29 @@ body {
     transition: all 0.3s;
 }
 
+.photo-gallery h4 {
+    font-family: "Dancing Script";
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--primary-color) !important;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.photo-gallery h4::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 20%;
+    background-color: #c9c9c9;
+    left: 40%;
+    bottom: -10px;
+}
+
+.photo-gallery h5 {
+    letter-spacing: 1.6px;
+}
+
 .where-we-are h4 {
     font-family: "Dancing Script";
     font-weight: 700;
@@ -183,9 +206,9 @@ body {
 }
 
 .custom-input {
-    border: 1px solid #cdcdcd;
+    border: 2px solid #ecebf2;
     width: 100%;
-    background-color: #ededed;
+    /* background-color: #ededed; */
     padding: 14px 20px;
     outline: none;
     transition: all 0.3s;
@@ -197,7 +220,7 @@ body {
 }
 
 .footer {
-    padding: 55px 0;
+    padding: 55px 0 30px 0;
 }
 
 .footer ul li {
@@ -237,9 +260,9 @@ body {
 .copyright p {
     margin-bottom: 0;
     text-align: center;
-    margin-top: 55px;
+    margin-top: 37px;
     color: #646464 !important;
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .copyright a {
@@ -336,6 +359,8 @@ body {
     align-items: center;
     border-radius: 5px;
     text-decoration: none;
+    outline: unset;
+    border: unset;
 }
 
 .quantity-group {
@@ -375,7 +400,7 @@ body {
 }
 .cart-image {
     width: 140px !important;
-}
+    border-radius: 12px;}
 
 .delete-product {
     outline: none;
@@ -471,12 +496,12 @@ body {
 
 @keyframes circle{
     0%{
-      transform:rotate(0deg)
-                rotate(0deg);
+        transform:rotate(0deg)
+        rotate(0deg);
 
     }
     100%{
-      transform:rotate(360deg);
+        transform:rotate(360deg);
     }
 }
 
@@ -506,7 +531,7 @@ a:hover {
 }
 
 .product-bg img {
-    width: -webkit-fill-available;
+    width: 100%;
     border-top-right-radius: inherit;
     border-top-left-radius: inherit;
 }
@@ -521,7 +546,7 @@ a:hover {
     box-shadow: 0 0 20px #0000001a;
     border-radius: 10px;
     padding: 20px;
-}
+    height: 180px;display: flex;}
 
 .buy-now {
     position: absolute;
@@ -535,7 +560,7 @@ a:hover {
 
 .order-now {
     position: absolute;
-    top: 35%;
+    top: 39%;
     right: 40%;
     font-size: 28px;
     width: 60px;
@@ -564,15 +589,16 @@ a:hover {
     content: '';
     position: absolute;
     height: 1px;
-    width: 10%;
+    width: 20%;
     background-color: #212529;
-    left: 45%;
+    left: 40%;
     bottom: -10px;
 }
 
 section.menu {
     background-color: var(--primary-color);
     padding: 20px 0;
+    margin-top: 50px;
 }
 
 .product-bg {
@@ -585,4 +611,236 @@ section.top-header.mt-3 {
     height: 831px;
     display: flex;
     align-items: flex-end;
+}
+
+.gallery-img {
+    border-radius: 14px;
+}
+
+.item-info {
+    position: absolute;
+    background: #00000024;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #212529;
+    top: 15px;
+    right: 15px;
+}
+
+.item-info-left {
+    position: absolute;
+    background: #ffffff24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #f1f1f1;
+    top: 15px;
+    left: 15px;
+    padding: 10px;
+}
+
+.item-info-right {
+    position: absolute;
+    background: #ffffff24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #f1f1f1;
+    top: 15px;
+    right: 15px;
+    padding: 10px;
+}
+
+/**
+ * Tooltip Styles
+ */
+
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+    visibility: hidden;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-bottom: 5px;
+    margin-left: -80px;
+    padding: 7px;
+    width: 160px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #000;
+    background-color: hsla(0, 0%, 20%, 0.9);
+    color: #fff;
+    content: attr(data-tooltip);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid #000;
+    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+}
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+    visibility: visible;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+}
+
+.menu_product_bg img {
+    border-radius: 10px;
+    height: 100%;}
+
+.top-header-gap {
+    gap: 1.5rem!important;
+}
+
+.call-us {
+    background: #fdca6e;
+    background-position-y: -192px;
+    height: 246px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.website_navbar {
+    position: relative;
+}
+
+.phone-number {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    /* width: 270px; */
+    border-radius: 10px;
+    text-decoration: unset;
+    color: #212529;
+    outline: unset;
+    border: unset;
+    font-weight: 700;
+}
+
+.mobile_navbar_btn {
+    top: 20px;
+    left: 20px;
+    display: none;
+}
+
+.mobile_navbar {
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    background: white;
+    box-shadow: unset;
+    width: 240px;
+    text-align: center;
+    padding: 30px;
+    margin-left: -240px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.mobile_navbar.active {
+    box-shadow: 0 0 20px #0000002b !important;
+    margin-left: 0 !important;
+    opacity: 1 !important;
+}
+
+.btn-square:focus {
+    box-shadow: unset !important;
+}
+
+.btn-square:active {
+    box-shadow: unset !important;
+}
+
+.nav-breadcrumb {
+    box-shadow: 0 0 20px #0000001a;
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.page {
+    color: #21252991;
+    text-decoration: unset;
+    font-weight: 500;
+}
+
+.current-page {
+    font-weight: 500;
+    text-decoration: unset;
+    color: #212529;
+}
+
+.separator {
+    font-size: 6px;
+    color: #212529;
+}
+
+.product-desc {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.shopping-cart-bg {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.cart-item img {
+    border-radius: 10px;
+}
+
+.checkout-details {
+    box-shadow: 0 6px 20px #00000021;
+    border-radius: 10px;
 }

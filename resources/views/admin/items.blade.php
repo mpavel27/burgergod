@@ -13,6 +13,8 @@
                     <th>Nume</th>
                     <th>Categorie</th>
                     <th>Descriere</th>
+                    <th>Grame</th>
+                    <th>Calori</th>
                     <th>Preț</th>
                     <th>Imagine</th>
                     <th>Acțiune</th>
@@ -25,6 +27,8 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->category_name }}</td>
                     <td>{{ $item->description }}</td>
+                    <td>{{ $item->grams }}</td>
+                    <td>{{ $item->calories }}</td>
                     <td>{{ $item->price }} RON</td>
                     <td><img src="{{ asset('items/'.$item->image) }}" style="width: 100px"></td>
                     <td>
@@ -54,6 +58,8 @@
                     <div class="modal-body">
                         <input name="name" type="text" class="form-control mb-3" placeholder="Numele produsului">
                         <textarea name="description" class="form-control mb-3" placeholder="Descriere"></textarea>
+                        <input name="grams" type="number" class="form-control mb-3" placeholder="Grame">
+                        <input name="calories" type="number" class="form-control mb-3" placeholder="Calorii">
                         <div class="form-group mb-3">
                             <label for="imageLabel">Încarcă o imagine</label>
                             <input type="file" name="image" class="form-control-file" id="imageLabel">

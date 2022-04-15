@@ -1,39 +1,69 @@
 @media only screen and (max-width: 992px) {
-    .toggle-navbar {
-        display: block;
-    }
-
-    .mobile-navbar.active {
-        display: block;
-        position: fixed;
-        padding: 20px;
-        text-align: center;
-        z-index: 300;
-        top: 116px;
-        background-color: var(--primary-color);
-        width: 300px;
-        right: 0;
-        transition: all 0.3s;
-    }
-
-    .mobile-navbar .btn-primary {
-        border-color: black !important;
-        border: 2px solid;
-    }
-
-    .mobile-navbar .btn-secondary {
-        color: white !important;
-    }
-
-    .mobile-navbar a {
-        color: black !important;
-    }
-
     .map {
         width: 400px;
     }
-    
+
+    .nav-links {
+        display: none !important;
+    }
+
+    .man-image {
+        display: none !important;
+    }
+
     .footer ul {
         margin-bottom: 30px !important;
+    }
+
+    .top-header {
+        height: unset !important;
+        padding: 30px 0;
+    }
+
+    .order-now {
+        position: absolute;
+        top: 42%;
+        right: 41%;
+        font-size: 28px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .top-header-gap {
+        gap: unset !important;
+    }
+
+    .partners img {
+        height: 20px !important;
+        margin: 0;
+    }
+
+    .navbar-mobile {
+        flex-direction: column;
+    }
+
+    .navbar-mobile img {
+        margin: 0 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .mobile_navbar_btn {
+        display: block;
+    }
+
+    .cart-item img {
+        display: none;
+    }
+
+    .cart-item h4 {
+        font-size: 16px;
+    }
+
+    .cart-item {
+        margin-bottom: 20px;
+    }
+
+    .shopping-cart-bg {
+        gap: 0;
     }
 }

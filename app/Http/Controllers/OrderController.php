@@ -25,13 +25,11 @@ class OrderController extends Controller
         if(count($items) != 0) {
             $total = array_sum(array_map(function ($e) { return $e->price; }, $items));
             if(session('shipment_type') == 1) {
-                $delivery_tax = Store::where('name', 'delivery_tax')->firstOrNew(['name' => 'delivery_tax', 'value' => '14.99'])->value;
+                $delivery_tax = Store::where('name', 'delivery_tax')->first()->value;
             } else {
                 $delivery_tax = 0;
             }
             return view('pages.checkout', compact(['total', 'delivery_tax']));
-        } else {
-            abort(404);
         }
     }
 
@@ -69,9 +67,11 @@ class OrderController extends Controller
                 event(new \App\Events\Orders("A aparut o noua comanda cu id-ul {$order->id}"));
                 session()->forget(['cart', 'shipment_type']);
                 session(['cart' => '[]']);
-                $user = User::where('id', Auth::id())->firstOrFail();
-                $user->cart = '[]';
-                $user->save();
+                if(Auth::check()) {
+                    $user = User::where('id', Auth::id())->first();
+                    $user->cart = '[]';
+                    $user->save();
+                }
                 if(session('orders')) {
                     $orders = json_decode(session('orders'));
                     array_push($orders, $order->id);
@@ -128,5 +128,19 @@ class OrderController extends Controller
         } else {
             return redirect()->route('app.home');
         }
+    }
+
+    public static function getSessionOrders() {
+        $sessionOrders = json_decode(session('orders'));
+        $orders = array();
+        foreach($sessionOrders as $key => $sessionOrder) {
+            $order = Orders::where('id', $sessionOrders[$key])->first();
+            $orders[$key] = $order;
+        }
+        return $orders;
+    }
+
+    public function viewSessionOrders() {
+        return dd($this->getSessionOrders());
     }
 }

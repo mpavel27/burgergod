@@ -14,7 +14,7 @@ class AddUsersDeliveryPlateNumber extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('car_number_plate')->comment('Delivery car number plate');;
+            $table->string('car_number_plate')->comment('Delivery car number plate');
         });
     }
 
