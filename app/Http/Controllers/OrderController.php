@@ -14,6 +14,7 @@ use DateTimeZone;
 class OrderController extends Controller
 {
     public function viewCheckout() {
+        $sessionOrders = OrderController::getSessionOrders();
         if(!session('shipment_type')) {
             return redirect()->route('app.cart');
         }
@@ -29,7 +30,7 @@ class OrderController extends Controller
             } else {
                 $delivery_tax = 0;
             }
-            return view('pages.checkout', compact(['total', 'delivery_tax']));
+            return view('pages.checkout', compact(['total', 'delivery_tax', 'sessionOrders']));
         }
     }
 
@@ -133,14 +134,22 @@ class OrderController extends Controller
     public static function getSessionOrders() {
         $sessionOrders = json_decode(session('orders'));
         $orders = array();
-        foreach($sessionOrders as $key => $sessionOrder) {
-            $order = Orders::where('id', $sessionOrders[$key])->first();
-            $orders[$key] = $order;
+        if($sessionOrders != null) {
+            foreach($sessionOrders as $key => $sessionOrder) {
+                $order = Orders::where('id', $sessionOrders[$key])->first();
+                $orders[$key] = $order;
+            }
+            return $orders;
+        } else {
+            return null;
         }
-        return $orders;
     }
 
     public function viewSessionOrders() {
-        return dd($this->getSessionOrders());
+        $orders = json_decode(session('orders'));
+        if (($key = array_search(1, $orders)) !== false) {
+            unset($orders[$key]);
+        }
+        return dd($orders);
     }
 }

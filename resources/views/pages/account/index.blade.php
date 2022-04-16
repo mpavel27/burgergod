@@ -15,7 +15,7 @@
                             <a class="btn btn-secondary w-100" data-bs-toggle="tab" href="#addresses">Adresele mele</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-secondary w-100" data-bs-toggle="tab" href="#addresses">Schimba parola</a>
+                            <a class="btn btn-secondary w-100" data-bs-toggle="tab" href="#addresses">Securitate</a>
                         </li>
                     </ul>
                 </div>
@@ -46,7 +46,46 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="orders">
-                        details222
+                        <div class="shadow p-4 rounded-3 border ms-4 w-100 table-responsive">
+                            <table id="dataTable" class="table table-striped fw-normal" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Produse</th>
+                                    <th>Tip Plată</th>
+                                    <th>Notițe Adiționale</th>
+                                    <th>Adresă</th>
+                                    <th>Oraș</th>
+                                    <th>Tip Livrare</th>
+                                    <th>Preț</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($accountOrders as $order)
+                                    <tr>
+                                        <td>
+                                            @foreach(json_decode($order->cart) as $cart)
+                                                <p class="m-0">{{ \App\Models\Items::where('id', $cart->item)->select('name')->first()->name }}</p>
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $order->payment_type }}</td>
+                                        @if($order->notes != 'NULL')
+                                            <td>{{ $order->notes }}</td>
+                                        @else
+                                            <td>Fară notițe adiționale</td>
+                                        @endif
+                                        <td>{{ $order->user_address }}</td>
+                                        <td>{{ $order->city }}</td>
+                                        @if($order->shipping_type == 1)
+                                            <td>Livrare Acasă</td>
+                                        @else
+                                            <td>Livrare Acasă</td>
+                                        @endif
+                                        <td>{{ $order->sub_total + $order->delivery_cost }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="addresses">
                         details2
@@ -58,4 +97,13 @@
             </div>
         </div>
     </section>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "language": {
+                    "url": "{{asset('assets/vendors/romanian.json')}}"
+                }
+            });
+        } );
+    </script>
 @endsection

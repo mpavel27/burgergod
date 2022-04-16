@@ -17,12 +17,14 @@ class UserController extends Controller
     public function viewHomepage() {
         $categories = Categories::with('items')->get();
         $topItems = Items::where('category', 2)->get();
-        return view('homepage', compact(['topItems', 'categories']));
+        $sessionOrders = OrderController::getSessionOrders();
+        return view('homepage', compact(['topItems', 'categories', 'sessionOrders']));
     }
 
     public function viewItem($id) {
         $item = Items::where('id', $id)->with('extras')->firstOrFail();
-        return view('pages.item', compact('item'));
+        $sessionOrders = OrderController::getSessionOrders();
+        return view('pages.item', compact(['item', 'sessionOrders']));
     }
 
     public function login(LoginRequest $request) {
@@ -125,13 +127,14 @@ class UserController extends Controller
     }
 
     public function viewCart() {
+        $sessionOrders = OrderController::getSessionOrders();
         if(Auth::check()) {
             $items = json_decode(Auth::user()->cart);
         } else {
             $items = json_decode(session('cart'));
         }
 //        return dd($items);
-        return view('pages.cart', compact('items'));
+        return view('pages.cart', compact(['items', 'sessionOrders']));
     }
 
     public function removeFromCart($index) {
@@ -149,14 +152,17 @@ class UserController extends Controller
     public function viewMenu() {
         $categories = Categories::with('items')->get();
         $items = Items::orderBy('id', 'DESC')->get();
-        return view('pages.menu', compact(['items', 'categories']));
+        $sessionOrders = OrderController::getSessionOrders();
+        return view('pages.menu', compact(['items', 'categories', 'sessionOrders']));
     }
 
     public function viewAboutUs() {
-        return view('pages.about_us');
+        $sessionOrders = OrderController::getSessionOrders();
+        return view('pages.about_us', compact('sessionOrders'));
     }
 
     public function viewContact() {
-        return view('pages.contact');
+        $sessionOrders = OrderController::getSessionOrders();
+        return view('pages.contact', compact('sessionOrders'));
     }
 }

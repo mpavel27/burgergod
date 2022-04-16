@@ -844,3 +844,43 @@ section.top-header.mt-3 {
     box-shadow: 0 6px 20px #00000021;
     border-radius: 10px;
 }
+
+.order-notifications {
+    position: fixed;
+    z-index: 100000;
+    bottom: 22px;
+    right: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-notifications .bg-warning {
+    border-radius: 10px;
+    box-shadow: 0 5px 20px #0000004d;
+}
+
+@-moz-keyframes spin {
+    100% { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform:rotate(360deg);
+    }
+}
+
+.order-notifications .fa-spinner-third {
+    -webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 1s linear infinite;
+}
+
+
+.page-item.active .page-link {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}

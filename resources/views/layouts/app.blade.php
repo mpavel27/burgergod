@@ -16,6 +16,9 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <style>
         .toast {
             width: 350px;
@@ -34,11 +37,19 @@
     </style>
 </head>
 <body>
+@if(!str_contains(Request::url(), '/order/'))
 <div class="order-notifications">
-    <div class="bg-warning p-4">
-        <p class="m-0">Ai o comanda in curs de procesare</p>
-    </div>
+    @if($sessionOrders != null)
+        @foreach($sessionOrders as $sessionOrder)
+        <a class="text-decoration-none text-dark" href="{{ route('app.order', ['id' => $sessionOrder->id]) }}">
+            <div class="bg-warning p-4">
+                <p class="m-0 fw-normal d-flex align-items-center"><i class="fad fa-spinner-third fs-3 me-3"></i>Aveți o comandă nouă în curs de procesare</p>
+            </div>
+        </a>
+        @endforeach
+    @endif
 </div>
+@endif
 <div class="mobile_navbar d-flex flex-column align-items-center">
     <a href="{{ route('app.home') }}">
         <img src="{{ asset('assets/images/logo.png') }}" alt="Burger God" height="80">

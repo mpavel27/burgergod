@@ -249,6 +249,11 @@ class AdminController extends Controller
             case 5:
                 $order->status = $type;
                 $order->preparing_date = $date->format('Y-m-d H:i:s');
+                $orders = json_decode(session('orders'));
+                if (($key = array_search($order->id, $orders)) !== false) {
+                    unset($orders[$key]);
+                }
+                session(['orders' => json_encode($orders)]);
         }
         $order->save();
         event(new \App\Events\OrderDetails($id, $type, $date->format('Y-m-d H:i:s')));
