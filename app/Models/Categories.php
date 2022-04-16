@@ -19,6 +19,6 @@ class Categories extends Model
     public $timestamps = true;
 
     public function items() {
-        return $this->hasMany(Items::class, 'category');
+        return $this->hasMany(Items::class, 'category')->where('visible', 1);
     }
 }
