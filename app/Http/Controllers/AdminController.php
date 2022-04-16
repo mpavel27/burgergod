@@ -14,11 +14,13 @@ use App\Http\Requests\createItemRequest;
 use App\Http\Requests\editItemRequest;
 use App\Http\Requests\SetOrderStatusRequest;
 use App\Http\Requests\AddDeliveryBoyRequest;
+use App\Http\Requests\UpdateStoreSettingsRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Items;
 use App\Models\Orders;
 use App\Models\Extras;
 use App\Models\User;
+use App\Models\Store;
 use Hash;
 use DateTime;
 use DateTimeZone;
@@ -346,5 +348,23 @@ class AdminController extends Controller
     public static function getProductNameById($id) {
         $item = Items::where('id', $id)->first();
         return $item->name;
+    }
+
+    public function viewShopSettings() {
+        $store_online = Store::where('name', 'store_online')->first()->value;
+        $delivery_tax = Store::where('name', 'delivery_tax')->first()->value;
+        return view('admin.admin-settings', compact(['store_online', 'delivery_tax']));
+    }
+
+    public function ShopSettingsValidation(UpdateStoreSettingsRequest $request) {
+        $delivery_tax = Store::where('name', 'delivery_tax')->update([
+            'value' => $request->delivery_tax
+        ]);
+        $store_online = Store::where('name', 'store_online')->update([
+            'value' => ($request->store_online == 'on') ? 'true' : 'false'
+        ]);
+        if($delivery_tax || $store_online) {
+            return redirect()->back();
+        }
     }
 }

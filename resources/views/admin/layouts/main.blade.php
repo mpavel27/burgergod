@@ -23,13 +23,14 @@
             <div class="d-flex flex-column gap-2">
                 <h4 class="text-center text-white m-0">Burger God</h4>
                 <p class="text-center text-muted mb-2">Logged as {{ Auth::user()->name }}</p>
-                <a href="{{ route('app.admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
+                <a href="{{ route('app.admin.dashboard') }}" class="btn btn-primary">Acasă</a>
                 @if(Auth::user()->type == 2)
-                <a href="{{ route('app.admin.categories') }}" class="btn btn-secondary">Categories</a>
-                <a href="{{ route('app.admin.items') }}" class="btn btn-secondary">Items</a>
-                <a href="{{ route('app.admin.extras') }}" class="btn btn-secondary">Extras</a>
-                <a href="#" class="btn btn-secondary">Clients</a>
-                <a href="{{ route('app.admin.delivery-boys') }}" class="btn btn-secondary">Delivery Boy</a>
+                    <a href="{{ route('app.admin.categories') }}" class="btn btn-secondary">Categorii</a>
+                    <a href="{{ route('app.admin.items') }}" class="btn btn-secondary">Produse</a>
+                    <a href="{{ route('app.admin.extras') }}" class="btn btn-secondary">Extra-uri</a>
+                    <a href="#" class="btn btn-secondary">Clienți</a>
+                    <a href="{{ route('app.admin.delivery-boys') }}" class="btn btn-secondary">Livratori</a>
+                    <a href="{{ route('app.admin.shop-settings') }}" class="btn btn-secondary">Setări Magazin</a>
                 @endif
             </div>
             <button id="collapse_button" class="collapse_btn btn btn-warning position-absolute"><i class="fas fa-bars"></i></button>

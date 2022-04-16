@@ -16,10 +16,16 @@ use App\Http\Controllers\OrderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('magazin-inchis', [UserController::class, 'viewShop'])->name('app.offline.shop');
 
+Route::middleware('isShopOnline')->group(function () {
+    Route::get('/item/{id}', [UserController::class, 'viewItem'])->name('app.item');
+    Route::get('/order/{id}', [OrderController::class, 'viewOrder'])->name('app.order');
+    Route::get('/orders', [OrderController::class, 'viewSessionOrders'])->name('app.orders');
+    Route::get('/meniu', [UserController::class, 'viewMenu'])->name('app.menu');
+});
 
 Route::get('/', [UserController::class, 'viewHomepage'])->name('app.home');
-Route::get('/item/{id}', [UserController::class, 'viewItem'])->name('app.item');
 Route::post('/loginValidation', [UserController::class, 'login'])->name('app.login');
 Route::post('/registerValidation', [UserController::class, 'register'])->name('app.register');
 Route::get('/logout', [UserController::class, 'logout'])->name('app.logout');
@@ -28,7 +34,6 @@ Route::prefix('/account')->middleware('auth')->group(function () {
     Route::get('/', [AccountController::class, 'viewAccount'])->name('app.account');
 });
 
-Route::get('/meniu', [UserController::class, 'viewMenu'])->name('app.menu');
 
 Route::prefix('/cart')->group(function () {
     Route::get('/', [UserController::class, 'viewCart'])->name('app.cart');
@@ -39,8 +44,6 @@ Route::prefix('/cart')->group(function () {
     Route::post('/checkout/validation', [OrderController::class, 'checkoutPost'])->name('app.cart.checkout.post');
 });
 
-Route::get('/order/{id}', [OrderController::class, 'viewOrder'])->name('app.order');
-Route::get('/orders', [OrderController::class, 'viewSessionOrders'])->name('app.orders');
 Route::get('/despre-noi', [UserController::class, 'viewAboutUs'])->name('app.about-us');
 Route::get('/contact', [UserController::class, 'viewContact'])->name('app.contact');
 
@@ -89,6 +92,11 @@ Route::prefix('/admin')->group(function () {
         Route::post('/add', [AdminController::class, 'addDeliveryBoy'])->name('app.admin.delivery-boys.post');
         Route::get('/edit/{deliveryId}', [AdminController::class, 'editDeliveryBoy'])->name('app.admin.delivery-boys.edit');
         Route::post('/edit/{deliveryId}/validation', [AdminController::class, 'editDeliveryValidation'])->name('app.admin.delivery-boys.edit.post');
+    });
+
+    Route::prefix('/shop-settings')->middleware(['auth:admin', 'isAdmin'])->group(function () {
+        Route::get('/', [AdminController::class, 'viewShopSettings'])->name('app.admin.shop-settings');
+        Route::post('/validate', [AdminController::class, 'ShopSettingsValidation'])->name('app.admin.shop-settings.validate');
     });
 });
 

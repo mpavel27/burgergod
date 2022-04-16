@@ -884,3 +884,7 @@ section.top-header.mt-3 {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
 }
+
+.swiper-button-next, .swiper-button-prev {
+    color: #212529 !important;
+}
