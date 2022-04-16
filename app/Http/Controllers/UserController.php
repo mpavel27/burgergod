@@ -6,6 +6,7 @@ use App\Http\Requests\AddCartRequest;
 use Illuminate\Http\Request;
 use App\Models\Items;
 use App\Models\User;
+use App\Models\Store;
 use App\Models\Categories;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
@@ -18,7 +19,8 @@ class UserController extends Controller
         $categories = Categories::with('items')->get();
         $topItems = Items::where('category', 2)->get();
         $sessionOrders = OrderController::getSessionOrders();
-        return view('homepage', compact(['topItems', 'categories', 'sessionOrders']));
+        $storeOnline = Store::where('name', 'store_online')->first()->value;
+        return view('homepage', compact(['topItems', 'categories', 'sessionOrders', 'storeOnline']));
     }
 
     public function viewItem($id) {

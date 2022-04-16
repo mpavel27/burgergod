@@ -43,9 +43,9 @@
 </section>
 <section class="menu">
     <div class="container">
+        @if($storeOnline == 'true')
         <h5 class="category-title text-center">Meniul Nostru</h5>
         <h5 class="fw-bold text-center my-4 mb-2">CEI MAI APRECIAȚI BURGERI</h5>
-        
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach($topItems as $item)
@@ -71,6 +71,12 @@
             <div class="swiper-pagination"></div>
         </div>
     </div>
+    @else
+        <div class="text-center py-5">
+            <h4>Ne pare rău dar momentan magazin-ul nostru este închis!</h4>
+            <p class="m-0">Vă rugăm să reveniți între orele 19:00 și 03:00</p>
+        </div>
+    @endif
 </section>
 <section class="photo-gallery my-5">
     <div class="container">
