@@ -45,6 +45,7 @@
     <div class="container">
         <h5 class="category-title text-center">Meniul Nostru</h5>
         <h5 class="fw-bold text-center my-4 mb-2">CEI MAI APRECIAȚI BURGERI</h5>
+        
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach($topItems as $item)
@@ -143,6 +144,10 @@
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
         },
     });
 </script>
