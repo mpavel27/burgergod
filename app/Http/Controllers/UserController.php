@@ -151,7 +151,7 @@ class UserController extends Controller
 
     public function viewMenu() {
         $categories = Categories::with('items')->get();
-        $items = Items::orderBy('id', 'DESC')->get();
+        $items = Items::where('visible', 1)->orderBy('id', 'DESC')->get();
         $sessionOrders = OrderController::getSessionOrders();
         return view('pages.menu', compact(['items', 'categories', 'sessionOrders']));
     }

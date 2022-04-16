@@ -121,6 +121,11 @@ class AdminController extends Controller
 
     public function editItemValidation($itemId, editItemRequest $request) {
         if($request->validated()) {
+            if($request->visible == 'on') {
+                $isVisible = 1;
+            } else {
+                $isVisible = 0;
+            }
             if (!$request->has('image')) {
                 $item = Items::where('id', $itemId)->update([
                     'name' => $request->name,
@@ -128,7 +133,8 @@ class AdminController extends Controller
                     'description' => $request->description,
                     'grams' => $request->grams,
                     'calories' => $request->calories,
-                    'price' => $request->price
+                    'price' => $request->price,
+                    'visible' => $isVisible
                 ]);
                 if ($item) {
                     toastr()->success("Ai editat cu succes produsul");
@@ -144,7 +150,8 @@ class AdminController extends Controller
                     'grams' => $request->grams,
                     'calories' => $request->calories,
                     'price' => $request->price,
-                    'image' => $imageName
+                    'image' => $imageName,
+                    'visible' => $isVisible
                 ]);
                 if ($item) {
                     toastr()->success("Ai editat cu succes produsul");

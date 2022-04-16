@@ -5,6 +5,14 @@
     </div>
     <form method="POST" action="{{ route('app.admin.item.edit.post', ['itemId' => $item->id]) }}" enctype="multipart/form-data" class="shadow-lg p-4 rounded-3">
         @csrf
+        <div class="form-check form-switch">
+            @if($item->visible == 0)
+                <input class="form-check-input" name="visible" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+            @else
+                <input class="form-check-input" name="visible" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+            @endif
+            <label class="form-check-label" for="flexSwitchCheckChecked">Produs vizibil pe site</label>
+        </div>
         <label for="name">Nume</label>
         <input id="name" type="text" name="name" class="form-control mb-3" placeholder="Nume..." value="{{ $item->name }}">
         <label for="description">Descriere</label>
