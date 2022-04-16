@@ -37,11 +37,11 @@ Route::prefix('/account')->middleware('auth')->group(function () {
 
 Route::prefix('/cart')->group(function () {
     Route::get('/', [UserController::class, 'viewCart'])->name('app.cart');
-    Route::post('/add', [UserController::class, 'addToCart'])->name('app.cart.add');
+    Route::post('/add', [UserController::class, 'addToCart'])->middleware('isShopOnline')->name('app.cart.add');
     Route::post('/remove/{index}', [UserController::class, 'removeFromCart'])->name('app.cart.remove');
-    Route::post('/validate', [OrderController::class, 'cartPost'])->name('app.cart.post');
-    Route::get('/checkout', [OrderController::class, 'viewCheckout'])->name('app.cart.checkout');
-    Route::post('/checkout/validation', [OrderController::class, 'checkoutPost'])->name('app.cart.checkout.post');
+    Route::post('/validate', [OrderController::class, 'cartPost'])->middleware('isShopOnline')->name('app.cart.post');
+    Route::get('/checkout', [OrderController::class, 'viewCheckout'])->middleware('isShopOnline')->name('app.cart.checkout');
+    Route::post('/checkout/validation', [OrderController::class, 'checkoutPost'])->middleware('isShopOnline')->name('app.cart.checkout.post');
 });
 
 Route::get('/despre-noi', [UserController::class, 'viewAboutUs'])->name('app.about-us');
