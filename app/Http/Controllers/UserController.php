@@ -172,4 +172,9 @@ class UserController extends Controller
         $sessionOrders = OrderController::getSessionOrders();
         return view('pages.shop_offline', compact('sessionOrders'));
     }
+
+    public function viewTerms() {
+        $sessionOrders = OrderController::getSessionOrders();
+        return view('pages.terms', compact('sessionOrders'));
+    }
 }

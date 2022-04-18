@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WheelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::prefix('/cart')->group(function () {
 
 Route::get('/despre-noi', [UserController::class, 'viewAboutUs'])->name('app.about-us');
 Route::get('/contact', [UserController::class, 'viewContact'])->name('app.contact');
+Route::get('/termeni-si-conditii', [UserController::class, 'viewTerms'])->name('app.terms');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');
