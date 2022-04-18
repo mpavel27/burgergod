@@ -33,7 +33,7 @@
                                         <label class="form-check-label fw-normal" for="extra{{ $extra->id }}">
                                             {{ $extra->name }} - @if($extra->type != 1) {{ $extra->price }} RON @else GRATIS @endif
                                         </label>
-                                        <div class="quantity-group mt-3 d-none">
+                                        <div class="quantity-group d-none">
                                             <button data-type="deincrement" data-extra-id="{{ $extra->id }}" type="button" class="fw-bold">-</button>
                                             <input type="text" class="quantity-input" name="quantity_{{ $extra->id }}" id="extra_quantity_{{ $extra->id }}" value="0" min="0" readonly>
                                             <button data-type="increment" data-extra-id="{{ $extra->id }}" type="button" class="fw-bold">+</button>
