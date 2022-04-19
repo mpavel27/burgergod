@@ -145,30 +145,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <h4>Link-uri utile</h4>
+                <h4>Social Media</h4>
                 <ul class="list-unstyled m-0">
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="https://www.instagram.com/burgergodro/" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/burgergodromania" target="_blank">Facebook</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <h4>Link-uri utile</h4>
                 <ul class="list-unstyled m-0">
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="{{ route('app.home') }}">Acasa</a></li>
+                    <li><a href="{{ route('app.menu') }}">Meniu</a></li>
+                    <li><a href="{{ route('app.about-us') }}">Despre Noi</a></li>
+                    <li><a href="{{ route('app.contact') }}">Contact</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
-                <h4>Link-uri utile</h4>
+                <h4>Legal</h4>
                 <ul class="list-unstyled m-0">
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
-                    <li><a href="#">Lorem Ipsum</a></li>
+                    <li><a href="{{ route('app.terms') }}">Termeni și condiții</a></li>
+                    <li><a href="#">Politică de confidențialitate</a></li>
+                    <li><a href="#">Politică de cookies</a></li>
+                    <li><a href="#">ANPC</a></li>
                 </ul>
             </div>
             <div class="col-md-3">

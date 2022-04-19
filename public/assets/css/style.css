@@ -560,7 +560,7 @@ a:hover {
 
 .order-now {
     position: absolute;
-    top: 39%;
+    top: 80%;
     right: 40%;
     font-size: 28px;
     width: 60px;
@@ -887,4 +887,9 @@ section.top-header.mt-3 {
 
 .swiper-button-next, .swiper-button-prev {
     color: #212529 !important;
+}
+
+.product-image {
+    border-radius: inherit;
+    position: relative;
 }

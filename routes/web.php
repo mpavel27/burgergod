@@ -49,6 +49,8 @@ Route::get('/despre-noi', [UserController::class, 'viewAboutUs'])->name('app.abo
 Route::get('/contact', [UserController::class, 'viewContact'])->name('app.contact');
 Route::get('/termeni-si-conditii', [UserController::class, 'viewTerms'])->name('app.terms');
 
+Route::get('/gift', [\App\Http\Controllers\GiftController::class, 'viewGift'])->name('app.gift');
+
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');
     Route::get('/', [AdminController::class, 'viewAdminIndex'])->name('app.admin.dashboard')->middleware(['auth:admin']);

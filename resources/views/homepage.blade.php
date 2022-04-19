@@ -16,13 +16,13 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="feature-bg text-center">
-                            <h4 class="m-0 fw-bold">100+</h4>
+                            <h4 class="m-0 fw-bold">500+</h4>
                             <h6 class="m-0 fw-bold text-muted">Clienți mulțumiți</h6>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
                         <div class="feature-bg text-center">
-                            <h4 class="m-0 fw-bold">40+ min</h4>
+                            <h4 class="m-0 fw-bold">40 min</h4>
                             <h6 class="m-0 fw-bold text-muted">Timp de livrare</h6>
                         </div>
                     </div>
@@ -51,13 +51,15 @@
                 @foreach($topItems as $item)
                 <div class="swiper-slide">
                     <div class="product-bg text-center position-relative">
-                        <img src="{{ asset('items/'.$item->image) }}">
+                        <div class="product-image">
+                            <img src="{{ asset('items/'.$item->image) }}">
+                            <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn-square btn-primary order-now"><i class="fad fa-shopping-cart"></i></a>
+                        </div>
                         <div class="p-4">
                             <h5 class="fw-bold">{{ $item->name }}</h5>
                             <p class="fw-normal">{{ $item->description }}</p>
                             <h5>{{ $item->price }} RON</h5>
                         </div>
-                        <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn-square btn-primary order-now"><i class="fad fa-shopping-cart"></i></a>
                         @if($item->grams != 0)
                         <div class="item-info-left m-0">Grame: {{ $item->grams }}</div>
                         @endif
@@ -151,10 +153,10 @@
             el: ".swiper-pagination",
             clickable: true,
         },
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
+        // autoplay: {
+        //     delay: 2500,
+        //     disableOnInteraction: false,
+        // },
     });
 </script>
 @endsection
