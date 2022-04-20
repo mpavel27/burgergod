@@ -119,7 +119,11 @@
                                     </label>
                                 </div>
                             </div>
+                            @if(array_sum(array_map(function ($e) { return $e->price; }, $items)) > 40)
                             <button type="submit" class="btn btn-primary w-100 mt-3" @if(!is_array($items) || (is_array($items) && count($items) == 0)) disabled="true" @endif>Finalizare comandă</button>
+                            @else
+                            <p class="m-0 text-center mt-3 text-muted fw-normal">Comanda trebuie sa fie de minim 40 RON</p>
+                            @endif
                         </form>
                     </div>
                 </div>
