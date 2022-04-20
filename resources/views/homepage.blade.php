@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-center flex-column">
                 <h1 class="fw-bold">Comandă acum</h1>
                 <h1 class="fw-bold">Burgeri Fresh și Gustoși</h1>
-                <p class="m-0 fw-normal mb-4">Înregistreză-te pe website-ul nostru și comandă acum burger-ul tău preferat</p>
+                <p class="m-0 fw-normal mb-4">Îți aducem gustul divin la tine acasă. Plasează o comandă, noi suntem deja la tine la ușă.</p>
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <div class="feature-bg text-center">

@@ -12,38 +12,48 @@
                             <a class="btn btn-secondary w-100" data-bs-toggle="tab" href="#orders">Istoric comenzi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-secondary w-100" data-bs-toggle="tab" href="#addresses">Adresele mele</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="btn btn-secondary w-100" data-bs-toggle="tab" href="#addresses">Securitate</a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content w-100">
                     <div class="tab-pane show active" id="details">
-                        <div class="shadow p-4 rounded-3 border ms-4 w-100">
+                        <form method="POST" action="{{ route('app.account.post') }}" class="shadow p-4 rounded-3 border ms-4 w-100">
+                            @csrf
                             <h4 class="m-0">Detaliile mele</h4>
                             <hr>
                             <div class="row">
                                 <div class="col-xl-6">
                                     <label for="nameLabel" class="fw-lighter">Numele tau</label>
-                                    <input type="text" class="form-control py-3" id="nameLabel" placeholder="Numele dvs." value="{{ $details->name }}">
+                                    <input type="text" class="form-control py-3" name="name" id="nameLabel" placeholder="Numele dvs." value="{{ $details->name }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-6 my-3">
                                     <label for="nameLabel" class="fw-lighter">Număr de telefon</label>
-                                    <input type="text" class="form-control py-3" id="nameLabel" placeholder="Numărul dvs. de telefon" value="{{ $details->phone_number }}">
+                                    <input type="text" class="form-control py-3" name="phone_number" id="nameLabel" placeholder="Numărul dvs. de telefon" value="{{ $details->phone_number }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-6">
                                     <label for="nameLabel" class="fw-lighter">Adresă de e-mail</label>
-                                    <input type="text" class="form-control py-3" id="nameLabel" placeholder="Adresa dvs. de e-mail" value="{{ $details->email }}" disabled="disabled">
+                                    <input type="email" class="form-control py-3" name="email" id="nameLabel" placeholder="Adresa dvs. de e-mail" value="{{ $details->email }}" disabled="disabled">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary mt-3">Actualizează</button>
-                        </div>
+                            <div class="row">
+                                <div class="col-xl-6 my-3">
+                                    <label for="address" class="fw-lighter">Adresă</label>
+                                    <input type="text" class="form-control py-3" name="address" id="address" placeholder="Adresă" value="{{ $details->address }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <label for="city" class="fw-lighter">Oraș</label>
+                                    <input type="text" class="form-control py-3" name="city" id="city" placeholder="Oraș" value="{{ $details->city }}">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Actualizează</button>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="orders">
                         <div class="shadow p-4 rounded-3 border ms-4 w-100 table-responsive">
