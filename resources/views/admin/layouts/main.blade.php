@@ -32,6 +32,7 @@
                     <a href="{{ route('app.admin.delivery-boys') }}" class="btn btn-secondary">Livratori</a>
                     <a href="{{ route('app.admin.shop-settings') }}" class="btn btn-secondary">Setări Magazin</a>
                 @endif
+                <a href="{{ route('app.logout') }}" class="btn btn-warning">Deloghează-te</a>
             </div>
             <button id="collapse_button" class="collapse_btn btn btn-warning position-absolute"><i class="fas fa-bars"></i></button>
         </div>

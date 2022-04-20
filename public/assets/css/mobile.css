@@ -66,4 +66,12 @@
     .shopping-cart-bg {
         gap: 0;
     }
+
+    .product-info {
+        height: 25% !important;display: flex;flex-direction: column;justify-content: space-between;
+    }
+}
+
+.product-info {
+    height: 55%;display: flex;flex-direction: column;justify-content: space-between;
 }

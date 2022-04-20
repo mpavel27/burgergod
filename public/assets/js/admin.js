@@ -1,5 +1,8 @@
 $(document).ready(function() {
     $('#app_dataTable').dataTable( {
+        "ordering": false
+    } );
+    $('#app_dataTable2').dataTable( {
         "order": [[ 0, "desc" ]]
     } );
     $('#admin_categories').dataTable();

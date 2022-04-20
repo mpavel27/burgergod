@@ -52,12 +52,12 @@ class AdminController extends Controller
     }
 
     public function viewAdminIndex() {
-        if(Auth::user()->type == 2)
-            $orders = Orders::orderBy('id', 'DESC')->get();
-        else
-            $orders = Orders::orderBy('id', 'DESC')->where('assigned_to', Auth::user()->id)->get();
+        $orders = Orders::orderBy('id', 'DESC')->where('status', 1)->get();
+        $workOrders = Orders::orderBy('id', 'DESC')->where('status', 2)->get();
+        $finishedOrders = Orders::orderBy('id', 'DESC')->where('status', 3)->orWhere('status', 4)->get();
+        $orderAssigned = Orders::orderBy('id', 'DESC')->where('assigned_to', Auth::user()->id)->where('status', 3)->get();
         $deliveryBoys = User::where('type', 1)->get();
-        return view('admin.dashboard', compact(['orders', 'deliveryBoys']));
+        return view('admin.dashboard', compact(['orders', 'deliveryBoys', 'workOrders', 'finishedOrders', 'orderAssigned']));
     }
 
     public function viewItems() {

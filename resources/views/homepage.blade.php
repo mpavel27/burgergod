@@ -53,12 +53,12 @@
                     <div class="product-bg text-center position-relative">
                         <div class="product-image">
                             <img src="{{ asset('items/'.$item->image) }}">
-                            <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn-square btn-primary order-now"><i class="fad fa-shopping-cart"></i></a>
                         </div>
-                        <div class="p-4">
+                        <div class="p-4 product-info">
                             <h5 class="fw-bold">{{ $item->name }}</h5>
                             <p class="fw-normal">{{ $item->description }}</p>
                             <h5>{{ $item->price }} RON</h5>
+                            <a href="{{ route('app.item', ['id' => $item->id]) }}" class="btn btn-primary"><i class="fad fa-shopping-cart"></i>Comandă</a>
                         </div>
                         @if($item->grams != 0)
                         <div class="item-info-left m-0">Grame: {{ $item->grams }}</div>
