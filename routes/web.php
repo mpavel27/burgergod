@@ -104,6 +104,8 @@ Route::prefix('/admin')->group(function () {
         Route::get('/', [AdminController::class, 'viewShopSettings'])->name('app.admin.shop-settings');
         Route::post('/validate', [AdminController::class, 'ShopSettingsValidation'])->name('app.admin.shop-settings.validate');
     });
+
+    Route::get('/clients', [AdminController::class, 'viewClients'])->middleware(['auth:admin', 'isAdmin'])->name('app.admin.clients');
 });
 
 Route::get('/cleareverything', function () {
