@@ -28,7 +28,7 @@
                     <a href="{{ route('app.admin.categories') }}" class="btn btn-secondary">Categorii</a>
                     <a href="{{ route('app.admin.items') }}" class="btn btn-secondary">Produse</a>
                     <a href="{{ route('app.admin.extras') }}" class="btn btn-secondary">Extra-uri</a>
-                    <a href="#" class="btn btn-secondary">Clienți</a>
+                    <a href="{{ route('app.admin.clients') }}" class="btn btn-secondary">Clienți</a>
                     <a href="{{ route('app.admin.delivery-boys') }}" class="btn btn-secondary">Livratori</a>
                     <a href="{{ route('app.admin.shop-settings') }}" class="btn btn-secondary">Setări Magazin</a>
                 @endif

@@ -367,4 +367,9 @@ class AdminController extends Controller
             return redirect()->back();
         }
     }
+
+    public function viewClients() {
+        $clients = User::where('type', 0)->get();
+        return view('admin.clients', compact('clients'));
+    }
 }
