@@ -98,10 +98,25 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="addresses">
-                        details2
+                        <form method="POST" action="{{ route('app.account.change-password') }}" class="shadow p-4 rounded-3 border ms-4 w-100">
+                            @csrf
+                            <h4 class="m-0">Securitate</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xl-6 mb-3">
+                                    <label for="account_password" class="fw-lighter">Parola Actuală</label>
+                                    <input type="password" class="form-control py-3" name="actual_password" id="account_password" placeholder="Parola Actuală">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <label for="new_password" class="fw-lighter">Parola Nouă</label>
+                                    <input type="password" class="form-control py-3" name="new_password" id="new_password" placeholder="Parola Nouă">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Actualizează</button>
+                        </form>
                     </div>
-                    <div class="tab-pane fade" id="security">
-                        details2
                     </div>
                 </div>
             </div>
