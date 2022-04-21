@@ -34,6 +34,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('app.logout');
 Route::prefix('/account')->middleware('auth')->group(function () {
     Route::get('/', [AccountController::class, 'viewAccount'])->name('app.account');
     Route::post('/validate', [AccountController::class, 'updateAccount'])->name('app.account.post');
+    Route::post('/change-password', [AccountController::class, 'changePassword'])->name('app.account.change-password');
 });
 
 
