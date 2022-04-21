@@ -21,6 +21,7 @@ use App\Models\Orders;
 use App\Models\Extras;
 use App\Models\User;
 use App\Models\Store;
+use App\Models\Sessions;
 use Hash;
 use DateTime;
 use DateTimeZone;
@@ -258,11 +259,19 @@ class AdminController extends Controller
             case 5:
                 $order->status = $type;
                 $order->preparing_date = $date->format('Y-m-d H:i:s');
-                $orders = json_decode(session('orders'));
-                if (($key = array_search($order->id, $orders)) !== false) {
-                    unset($orders[$key]);
+                $sessions = Sessions::get();
+                foreach($sessions as $session) {
+                    $payload = unserialize(base64_decode($session->payload));
+                    if(array_key_exists('orders', $payload)) {
+                        if (($key = array_search($order->id, json_decode($payload['orders']))) !== false) {
+                            $orders = json_decode($payload['orders']);
+                            unset($orders[$key]);
+                            $payload['orders'] = $orders;
+                            $newPayload = serialize(base64_encode(json_encode($payload)));
+                            Sessions::where('id', $session->id)->update(['payload' => $newPayload]);
+                        }
+                    }
                 }
-                session(['orders' => json_encode($orders)]);
         }
         $order->save();
         event(new \App\Events\OrderDetails($id, $type, $date->format('Y-m-d H:i:s')));
