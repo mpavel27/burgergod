@@ -52,6 +52,7 @@ Route::get('/contact', [UserController::class, 'viewContact'])->name('app.contac
 Route::get('/termeni-si-conditii', [UserController::class, 'viewTerms'])->name('app.terms');
 
 Route::get('/gift', [\App\Http\Controllers\GiftController::class, 'viewGift'])->name('app.gift');
+Route::post('/gift', [\App\Http\Controllers\GiftController::class, 'requestGift'])->name('app.gift.request');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->middleware('auth:admin')->name('app.admin.logout');

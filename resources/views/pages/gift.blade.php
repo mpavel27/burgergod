@@ -263,7 +263,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="text-center text-dark mb-5"><strong>Apasă pe cadou pentru a-ți remedia caștigul</strong></h3>
+                    <h3 class="text-center text-dark mb-5"><strong>Apasă pe cadou pentru a-ți revendica caștigul</strong></h3>
                 </div>
                 <div class="col-12 mt-3 d-flex justify-content-center">
                     <div class="box">
@@ -282,6 +282,12 @@
     <script>
         $('#box').click(function () {
             $('#box').addClass('box-active');
+
+            axios.post('{{ route('app.gift.request') }}')
+                // get gift
+                .then(res => {
+                    console.log(res.data.product_name)
+                });
         });
     </script>
 @endsection
